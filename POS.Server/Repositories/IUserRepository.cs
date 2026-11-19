@@ -7,5 +7,6 @@ namespace POS.Server.Repositories
         Task<bool> UserExistsAsync(string email);
         Task<User?> GetUserByEmailAsync(string email);
         Task<User> CreateUserAsync(User user);
+        Task<List<User>> GetAllUsersAsync();
     }
 }

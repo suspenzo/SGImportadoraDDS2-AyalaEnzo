@@ -20,3 +20,4 @@ C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Shar
 C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Shared\obj\Debug\net9.0\refint\POS.Shared.dll
 C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Shared\obj\Debug\net9.0\POS.Shared.pdb
 C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Shared\obj\Debug\net9.0\ref\POS.Shared.dll
+C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Shared\obj\Debug\net9.0\POS.Shared.sourcelink.json

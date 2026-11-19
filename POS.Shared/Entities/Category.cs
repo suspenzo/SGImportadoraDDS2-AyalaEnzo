@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POS.Shared
+namespace POS.Shared.Entities
 {
     public class Category
     {

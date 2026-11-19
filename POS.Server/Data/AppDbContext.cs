@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using POS.Shared; // Asegúrate de que este sea el namespace de tus entidades
 using POS.Shared.Entities;
 
 namespace POS.Server.Data
@@ -12,7 +11,6 @@ namespace POS.Server.Data
             // Aquí defines las tablas de tu base de datos
             public DbSet<Product> Products { get; set; }
             public DbSet<Category> Categories { get; set; }
-        // public DbSet<User> Users { get; set; } // Cuando tengas la entidad User
 
             public DbSet<User> Users { get; set; }
     }

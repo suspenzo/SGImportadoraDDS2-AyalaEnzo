@@ -5,6 +5,7 @@ using POS.Shared.Entities;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Linq;
 
 namespace POS.Server.Services
 {
@@ -27,7 +28,7 @@ namespace POS.Server.Services
                 return null; // Usuario ya existe
             }
 
-            // 2. Encriptar la contraseña (Imagen 5 - comentario del profe)
+            // 2. Encriptar la contraseña 
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
             // 3. Crear el objeto User
@@ -104,6 +105,20 @@ namespace POS.Server.Services
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public async Task<List<UserResponseDto>> GetAllUsersAsync()
+        {
+            var users = await _userRepository.GetAllUsersAsync();
+
+            // Convertimos la lista de entidades a lista de DTOs para ocultar el hash
+            return users.Select(u => new UserResponseDto
+            {
+                Id = u.Id,
+                Name = u.Name,
+                Email = u.Email,
+                Role = u.Role.ToString()
+            }).ToList();
         }
     }
 }

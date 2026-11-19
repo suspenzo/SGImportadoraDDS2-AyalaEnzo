@@ -33,5 +33,11 @@ namespace POS.Server.Repositories
             await _context.SaveChangesAsync();
             return user;
         }
+
+        public async Task<List<User>> GetAllUsersAsync()
+        {
+            // Trae todos los usuarios de la base de datos
+            return await _context.Users.ToListAsync();
+        }
     }
 }

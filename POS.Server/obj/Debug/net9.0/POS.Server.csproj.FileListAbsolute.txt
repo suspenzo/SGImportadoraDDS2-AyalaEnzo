@@ -329,10 +329,11 @@ C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Serv
 C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Server\obj\Debug\net9.0\staticwebassets.build.json.cache
 C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Server\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Server\obj\Debug\net9.0\staticwebassets.build.endpoints.json
-C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Server\obj\Debug\net9.0\swae.build.ex.cache
 C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Server\obj\Debug\net9.0\POS.Server.csproj.Up2Date
 C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Server\obj\Debug\net9.0\POS.Server.dll
 C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Server\obj\Debug\net9.0\refint\POS.Server.dll
 C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Server\obj\Debug\net9.0\POS.Server.pdb
 C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Server\obj\Debug\net9.0\POS.Server.genruntimeconfig.cache
 C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Server\obj\Debug\net9.0\ref\POS.Server.dll
+C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Server\obj\Debug\net9.0\POS.Server.sourcelink.json
+C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Server\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
