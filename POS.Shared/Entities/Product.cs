@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POS.Shared.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,14 +10,16 @@ namespace POS.Shared.Entities
 {
     public class Product
     {
-        public int productID { get; set; }
-        public string sku { get; set; } = string.Empty;
-        public string nombre { get; set; } = string.Empty;
-        public string descripcion { get; set; } = string.Empty;
-        public Category categoria { get; set; } = new Category(); //revisar = new Category();
-        public int id_categoria { get; set; }
-        public int marca { get; set; }
-        public string modelo { get; set; } = string.Empty;
-        public decimal precio_venta { get; set; }
+        public int ProductID { get; set; }
+        public string Sku { get; set; } = string.Empty;
+        public string Nombre { get; set; } = string.Empty;
+        public string Descripcion { get; set; } = string.Empty;
+        public Category? Categoria { get; set; }
+        public int CategoryID { get; set; }
+        public Marca? Marca { get; set; }
+        public int MarcaID { get; set; }
+        public string Modelo { get; set; } = string.Empty;
+        public decimal PrecioVenta { get; set; }
+        public Status Estado { get; set; } = Status.Activo;
     }
 }

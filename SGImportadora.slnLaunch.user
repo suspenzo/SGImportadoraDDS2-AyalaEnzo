@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Nuevo perfil",
+    "Projects": [
+      {
+        "Path": "POS.Server\\POS.Server.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "POS.Client\\POS.Client.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

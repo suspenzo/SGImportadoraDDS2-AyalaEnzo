@@ -9,7 +9,10 @@ namespace POS.Shared.Entities
     public class Category
     {
         public int CategoryID { get; set; }
-        public string nombre { get; set; } = string.Empty;
-        public string descripcion { get; set; } = string.Empty;
+        public string Nombre { get; set; } = string.Empty;
+        public string Descripcion { get; set; } = string.Empty;
+
+        // Propiedad de navegación (opcional, pero útil para relaciones)
+        public ICollection<Product> Productos { get; set; } = new List<Product>();
     }
 }

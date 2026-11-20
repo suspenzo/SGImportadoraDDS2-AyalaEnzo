@@ -14,5 +14,7 @@ namespace POS.Shared.Entities
         public string Email { get; set; } = string.Empty;
         public string PasswordHash { get; set; } = string.Empty;
         public Role Role { get; set; }
+        public Status Estado { get; set; } = Status.Activo;
+        public DateTime FechaCreacion { get; set; } = DateTime.Now;
     }
 }

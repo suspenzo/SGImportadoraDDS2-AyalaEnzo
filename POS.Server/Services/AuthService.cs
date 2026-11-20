@@ -2,10 +2,11 @@
 using POS.Server.Repositories;
 using POS.Shared.DTOs;
 using POS.Shared.Entities;
+using POS.Shared.Enums;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Linq;
 
 namespace POS.Server.Services
 {
@@ -37,7 +38,9 @@ namespace POS.Server.Services
                 Name = request.FullName,
                 Email = request.Email,
                 PasswordHash = passwordHash,
-                Role = request.Role
+                Role = request.Role,
+                Estado = Status.Activo,
+                FechaCreacion = DateTime.Now
             };
 
             // 4. Guardar en la Base de Datos usando el Repositorio
@@ -107,17 +110,19 @@ namespace POS.Server.Services
             return tokenHandler.WriteToken(token);
         }
 
-        public async Task<List<UserResponseDto>> GetAllUsersAsync()
+        public async Task<List<UserRequest>> GetAllUsersAsync()
         {
             var users = await _userRepository.GetAllUsersAsync();
 
             // Convertimos la lista de entidades a lista de DTOs para ocultar el hash
-            return users.Select(u => new UserResponseDto
+            return users.Select(u => new UserRequest
             {
                 Id = u.Id,
                 Name = u.Name,
                 Email = u.Email,
-                Role = u.Role.ToString()
+                Role = u.Role.ToString(),
+                Estado = u.Estado,
+                FechaCreacion = u.FechaCreacion
             }).ToList();
         }
     }

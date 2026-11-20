@@ -1,0 +1,220 @@
+﻿@page "/products"
+@attribute [Authorize]
+@using POS.Shared.DTOs
+@using POS.Shared.Enums
+@inject HttpClient Http
+@inject IJSRuntime JSRuntime
+
+<h3>Gestión de Productos</h3>
+
+@if (errorMessage != null)
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+
+<button class="btn btn-primary mb-3" @onclick="ShowCreateForm">Nuevo Producto</button>
+
+@if (showForm)
+{
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">@(isEditing ? "Editar Producto" : "Nuevo Producto")</h5>
+            <EditForm Model="currentProduct" OnValidSubmit="SaveProduct">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label>SKU</label>
+                        <InputText @bind-Value="currentProduct.Sku" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Nombre</label>
+                        <InputText @bind-Value="currentProduct.Nombre" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Precio Venta</label>
+                        <InputNumber @bind-Value="currentProduct.PrecioVenta" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Categoría</label>
+                        <InputSelect @bind-Value="currentProduct.CategoryID" class="form-control">
+                            <option value="0">Seleccione...</option>
+                            @foreach (var cat in categories)
+                            {
+                                <option value="@cat.CategoryID">@cat.Nombre</option>
+                            }
+                        </InputSelect>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Marca</label>
+                        <InputSelect @bind-Value="currentProduct.MarcaID" class="form-control">
+                            <option value="0">Seleccione...</option>
+                            @foreach (var m in marcas)
+                            {
+                                <option value="@m.MarcaID">@m.Nombre</option>
+                            }
+                        </InputSelect>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Modelo</label>
+                        <InputText @bind-Value="currentProduct.Modelo" class="form-control" />
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <button type="button" class="btn btn-secondary" @onclick="CancelForm">Cancelar</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>SKU</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Marca</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (products == null)
+        {
+            <tr><td colspan="7">Cargando productos...</td></tr>
+        }
+        else
+        {
+            @foreach (var prod in products)
+            {
+                <tr>
+                    <td>@prod.ProductID</td>
+                    <td>@prod.Sku</td>
+                    <td>@prod.Nombre</td>
+                    <td>@prod.NombreCategoria</td>
+                    <td>@prod.NombreMarca</td>
+                    <td>@prod.PrecioVenta.ToString("C")</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning" @onclick="() => EditProduct(prod)">Editar</button>
+                        <button class="btn btn-sm btn-danger" @onclick="() => DeleteProduct(prod.ProductID)">Eliminar</button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<ProductResponse>? products;
+    private List<CategoryResponse> categories = new();
+    private List<MarcaResponse> marcas = new();
+
+    private ProductRequest currentProduct = new();
+    private bool showForm = false;
+    private bool isEditing = false;
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        try
+        {
+            // Cargamos listas para los dropdowns
+            categories = await Http.GetFromJsonAsync<List<CategoryResponse>>("api/Category") ?? new();
+            marcas = await Http.GetFromJsonAsync<List<MarcaResponse>>("api/Marca") ?? new();
+
+            // Cargamos los productos
+            products = await Http.GetFromJsonAsync<List<ProductResponse>>("api/Product");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al cargar datos: {ex.Message}";
+        }
+    }
+
+    private void ShowCreateForm()
+    {
+        currentProduct = new ProductRequest { Estado = Status.Activo };
+        isEditing = false;
+        showForm = true;
+        errorMessage = null;
+    }
+
+    private void EditProduct(ProductResponse prod)
+    {
+        currentProduct = new ProductRequest
+        {
+            Sku = prod.Sku,
+            Nombre = prod.Nombre,
+            Descripcion = prod.Descripcion,
+            CategoryID = prod.CategoryID, // Nota: Asegúrate de que tu ResponseDto incluya estos IDs
+            MarcaID = prod.MarcaID,
+            Modelo = prod.Modelo,
+            PrecioVenta = prod.PrecioVenta,
+            Estado = prod.Estado
+        };
+
+        // Como necesitamos el ID para actualizar, lo guardamos temporalmente
+        // (Una mejor práctica es tener el ID en el RequestDto o usar una variable aparte)
+        editingProductId = prod.ProductID;
+
+        isEditing = true;
+        showForm = true;
+        errorMessage = null;
+    }
+
+    private int editingProductId;
+
+    private async Task SaveProduct()
+    {
+        try
+        {
+            HttpResponseMessage response;
+            if (isEditing)
+            {
+                response = await Http.PutAsJsonAsync($"api/Product/{editingProductId}", currentProduct);
+            }
+            else
+            {
+                response = await Http.PostAsJsonAsync("api/Product", currentProduct);
+            }
+
+            if (response.IsSuccessStatusCode)
+            {
+                showForm = false;
+                await LoadData(); // Recargamos la tabla
+            }
+            else
+            {
+                errorMessage = "Error al guardar el producto. Verifique los datos.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error de conexión: {ex.Message}";
+        }
+    }
+
+    private async Task DeleteProduct(int id)
+    {
+        var confirm = await JSRuntime.InvokeAsync<bool>("confirm", "¿Estás seguro de eliminar este producto?");
+        if (confirm)
+        {
+            var response = await Http.DeleteAsync($"api/Product/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadData();
+            }
+        }
+    }
+
+    private void CancelForm()
+    {
+        showForm = false;
+        errorMessage = null;
+    }
+}

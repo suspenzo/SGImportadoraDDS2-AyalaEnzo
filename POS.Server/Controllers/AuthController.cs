@@ -45,7 +45,7 @@ namespace POS.Server.Controllers
 
         [HttpGet("usuarios")]
         [Authorize(Roles = "Administrador")] //  Solo los usuarios con rol Administrador pueden entrar
-        public async Task<ActionResult<List<UserResponseDto>>> GetAllUsers()
+        public async Task<ActionResult<List<UserRequest>>> GetAllUsers()
         {
             var users = await _authService.GetAllUsersAsync();
             return Ok(users);
