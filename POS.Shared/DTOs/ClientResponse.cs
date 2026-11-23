@@ -10,7 +10,9 @@ namespace POS.Shared.DTOs
     public class ClientResponse
     {
         public int Id { get; set; }
-        public string NombreCompleto { get; set; } = string.Empty; // Lo unimos para mostrarlo bonito
+        public string Nombre { get; set; } = string.Empty;    
+        public string APaterno { get; set; } = string.Empty;    
+        public string AMaterno { get; set; } = string.Empty;
         public string NumDocumento { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Telefono { get; set; } = string.Empty;

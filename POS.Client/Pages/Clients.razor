@@ -1,0 +1,234 @@
+﻿@page "/clients"
+@attribute [Authorize]
+@using POS.Shared.DTOs
+@using POS.Shared.Enums
+@inject HttpClient Http
+@inject IJSRuntime JSRuntime
+
+<h3>Gestión de Clientes</h3>
+
+@if (errorMessage != null)
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+
+<button class="btn btn-primary mb-3" @onclick="ShowCreateForm">Nuevo Cliente</button>
+
+@if (showForm)
+{
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">@(isEditing ? "Editar Cliente" : "Nuevo Cliente")</h5>
+            <EditForm Model="currentClient" OnValidSubmit="SaveClient">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label>Nombre(s) *</label>
+                        <InputText @bind-Value="currentClient.Nombre" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Apellido Paterno *</label>
+                        <InputText @bind-Value="currentClient.APaterno" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Apellido Materno</label>
+                        <InputText @bind-Value="currentClient.AMaterno" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>N° Documento (DNI/NIT) *</label>
+                        <InputText @bind-Value="currentClient.NumDocumento" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Email</label>
+                        <InputText @bind-Value="currentClient.Email" type="email" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Teléfono</label>
+                        <InputText @bind-Value="currentClient.Telefono" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Estado</label>
+                        <InputSelect @bind-Value="currentClient.Estado" class="form-control">
+                            <option value="@Status.Activo">Activo</option>
+                            <option value="@Status.Inactivo">Inactivo</option>
+                        </InputSelect>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <button type="button" class="btn btn-secondary" @onclick="CancelForm">Cancelar</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre Completo</th>
+            <th>Documento</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (clients == null)
+        {
+            <tr><td colspan="7" class="text-center">Cargando clientes...</td></tr>
+        }
+        else if (clients.Count == 0)
+        {
+            <tr><td colspan="7" class="text-center">No hay clientes registrados.</td></tr>
+        }
+        else
+        {
+            @foreach (var cli in clients)
+            {
+                <tr>
+                    <td>@cli.Id</td>
+                    <td>@cli.Nombre @cli.APaterno @cli.AMaterno</td>
+                    <td>@cli.NumDocumento</td>
+                    <td>@cli.Email</td>
+                    <td>@cli.Telefono</td>
+                    <td>
+                        @if (cli.Estado == Status.Activo)
+                        {
+                            <span class="badge bg-success">Activo</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Inactivo</span>
+                        }
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-warning me-1" @onclick="() => EditClient(cli)">Editar</button>
+                        <button class="btn btn-sm btn-danger" @onclick="() => DeleteClient(cli.Id)">Eliminar</button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<ClientResponse>? clients;
+    private ClientRequest currentClient = new();
+
+    private bool showForm = false;
+    private bool isEditing = false;
+    private int editingClientId;
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        try
+        {
+            errorMessage = null;
+            // Nota: Asegúrate de que la ruta coincida con tu controlador (api/Client)
+            clients = await Http.GetFromJsonAsync<List<ClientResponse>>("api/Client");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al cargar los clientes: {ex.Message}";
+        }
+    }
+
+    private void ShowCreateForm()
+    {
+        currentClient = new ClientRequest { Estado = Status.Activo };
+        isEditing = false;
+        showForm = true;
+        errorMessage = null;
+    }
+
+    private void EditClient(ClientResponse cli)
+    {
+        currentClient = new ClientRequest
+        {
+            Nombre = cli.Nombre,
+            APaterno = cli.APaterno,
+            AMaterno = cli.AMaterno,
+            NumDocumento = cli.NumDocumento,
+            Email = cli.Email,
+            Telefono = cli.Telefono,
+            Estado = cli.Estado
+        };
+
+        editingClientId = cli.Id;
+        isEditing = true;
+        showForm = true;
+        errorMessage = null;
+    }
+
+    private async Task SaveClient()
+    {
+        try
+        {
+            errorMessage = null;
+            HttpResponseMessage response;
+
+            if (isEditing)
+            {
+                response = await Http.PutAsJsonAsync($"api/Client/{editingClientId}", currentClient);
+            }
+            else
+            {
+                response = await Http.PostAsJsonAsync("api/Client", currentClient);
+            }
+
+            if (response.IsSuccessStatusCode)
+            {   
+                showForm = false;
+                await LoadData(); // Recargamos la tabla
+            }
+            else
+            {
+                // Si el backend devuelve un BadRequest (ej. documento duplicado)
+                var errorContent = await response.Content.ReadAsStringAsync();
+                errorMessage = $"Error al guardar: {errorContent}";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error de conexión: {ex.Message}";
+        }
+    }
+
+    private async Task DeleteClient(int id)
+    {
+        bool confirm = await JSRuntime.InvokeAsync<bool>("confirm", "¿Estás seguro de que deseas eliminar este cliente?");
+
+        if (confirm)
+        {
+            try
+            {
+                var response = await Http.DeleteAsync($"api/Client/{id}");
+                if (response.IsSuccessStatusCode)
+                {
+                    await LoadData();
+                }
+                else
+                {
+                    errorMessage = "No se pudo eliminar el cliente. Verifique si tiene ventas asociadas.";
+                }
+            }
+            catch (Exception ex)
+            {
+                errorMessage = $"Error al eliminar: {ex.Message}";
+            }
+        }
+    }
+
+    private void CancelForm()
+    {
+        showForm = false;
+        errorMessage = null;
+    }
+}

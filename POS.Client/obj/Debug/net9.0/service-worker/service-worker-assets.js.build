@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "zRUWud+D",
+  "version": "6WwVTtxb",
   "assets": [
     {
       "hash": "sha256-mRRHkKsCpZho3o2g9E5XxJjQj3O5ZXkoqMH6TRSHGOo=",
@@ -138,20 +138,20 @@ self.assetsManifest = {
       "url": "_framework/Microsoft.Win32.Registry.kxreztpsym.wasm"
     },
     {
-      "hash": "sha256-OVs10d5JI3CmeSNFTlDguc6oVC/WVIVs27Iu5etohuU=",
-      "url": "_framework/POS.Client.fmym4etsvz.pdb"
+      "hash": "sha256-u8IawMJJbu768FMFOSfusV5TPViA5ZR70jgGRtqAaGk=",
+      "url": "_framework/POS.Client.116fxc0cm7.wasm"
     },
     {
-      "hash": "sha256-Iye9Wy+O8ibCz+vGJzDbdHO0rcC3xigBAzw0+LV53to=",
-      "url": "_framework/POS.Client.p1qwlem48k.wasm"
+      "hash": "sha256-59iDOw6b57zWuwTV+8gkoJCU+nQpDP8g7xQQG0SIHgI=",
+      "url": "_framework/POS.Client.5t4js739tb.pdb"
     },
     {
-      "hash": "sha256-OLsYHkZyIfy4ppVRhR+D+k8YwXxCIjtxXOj7APmRqvM=",
-      "url": "_framework/POS.Shared.k1lh86u4dx.wasm"
+      "hash": "sha256-XUIgkSkfkofVWGgBx3K+xEW2e4CYNiYvxvFIemJVoZg=",
+      "url": "_framework/POS.Shared.bqnqv9wiou.wasm"
     },
     {
-      "hash": "sha256-rBih7ZBWfKXnfPTMPVHnXBVXQ+P4uY9yMq1Oxqb9M9U=",
-      "url": "_framework/POS.Shared.s2niqysva9.pdb"
+      "hash": "sha256-woYRRzbZEfgZRRTrRl//yCdEGNV7tFOO5NDN4ZR3QZM=",
+      "url": "_framework/POS.Shared.e1l16c3b5u.pdb"
     },
     {
       "hash": "sha256-n/Oc1WzjrFIIUZ+OrdGL5V2zdlBCnx7tDallbl1OAJo=",
@@ -806,7 +806,7 @@ self.assetsManifest = {
       "url": "_framework/WindowsBase.y8ae02uxne.wasm"
     },
     {
-      "hash": "sha256-5RPZS/y3YnHNRHgkK95oAU+FXz/xMB64PKUV2tjPzK8=",
+      "hash": "sha256-QDP4SFUxxH0O/2Wf8jxUMJSgL5IWIsSejEQn71fgi8k=",
       "url": "_framework/blazor.boot.json"
     },
     {

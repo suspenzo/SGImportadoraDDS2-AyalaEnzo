@@ -3,24 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2E51F58A-26F2-4D6C-BB0E-D420B012AD0C}|POS.Shared\\POS.Shared.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.shared\\dtos\\productresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E51F58A-26F2-4D6C-BB0E-D420B012AD0C}|POS.Shared\\POS.Shared.csproj|solutionrelative:pos.shared\\dtos\\productresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DFDF048C-E798-4485-85A0-93EDEDB59CA3}|POS.Client\\POS.Client.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.client\\providers\\customauthstateprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DFDF048C-E798-4485-85A0-93EDEDB59CA3}|POS.Client\\POS.Client.csproj|solutionrelative:pos.client\\providers\\customauthstateprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DFDF048C-E798-4485-85A0-93EDEDB59CA3}|POS.Client\\POS.Client.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.client\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{DFDF048C-E798-4485-85A0-93EDEDB59CA3}|POS.Client\\POS.Client.csproj|solutionrelative:pos.client\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DFDF048C-E798-4485-85A0-93EDEDB59CA3}|POS.Client\\POS.Client.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.client\\pages\\products.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DFDF048C-E798-4485-85A0-93EDEDB59CA3}|POS.Client\\POS.Client.csproj|solutionrelative:pos.client\\pages\\products.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{DFDF048C-E798-4485-85A0-93EDEDB59CA3}|POS.Client\\POS.Client.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.client\\pages\\users.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DFDF048C-E798-4485-85A0-93EDEDB59CA3}|POS.Client\\POS.Client.csproj|solutionrelative:pos.client\\pages\\users.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DFDF048C-E798-4485-85A0-93EDEDB59CA3}|POS.Client\\POS.Client.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DFDF048C-E798-4485-85A0-93EDEDB59CA3}|POS.Client\\POS.Client.csproj|solutionrelative:pos.client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.server\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|solutionrelative:pos.server\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DFDF048C-E798-4485-85A0-93EDEDB59CA3}|POS.Client\\POS.Client.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.client\\providers\\authheaderhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DFDF048C-E798-4485-85A0-93EDEDB59CA3}|POS.Client\\POS.Client.csproj|solutionrelative:pos.client\\providers\\authheaderhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.server\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|solutionrelative:pos.server\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 18,
+          "SelectedChildIndex": 17,
           "Children": [
             {
               "$type": "Bookmark",
@@ -102,68 +102,64 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CustomAuthStateProvider.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Client\\Providers\\CustomAuthStateProvider.cs",
+              "RelativeDocumentMoniker": "POS.Client\\Providers\\CustomAuthStateProvider.cs",
+              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Client\\Providers\\CustomAuthStateProvider.cs",
+              "RelativeToolTip": "POS.Client\\Providers\\CustomAuthStateProvider.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-22T21:40:31.109Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
               "Title": "NavMenu.razor",
               "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Client\\Layout\\NavMenu.razor",
               "RelativeDocumentMoniker": "POS.Client\\Layout\\NavMenu.razor",
               "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Client\\Layout\\NavMenu.razor",
               "RelativeToolTip": "POS.Client\\Layout\\NavMenu.razor",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAIwBwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABcAAAAAAAAAAAAAACUAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-11-20T07:27:00.171Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ProductResponse.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Shared\\DTOs\\ProductResponse.cs",
-              "RelativeDocumentMoniker": "POS.Shared\\DTOs\\ProductResponse.cs",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Shared\\DTOs\\ProductResponse.cs",
-              "RelativeToolTip": "POS.Shared\\DTOs\\ProductResponse.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABAAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-20T07:24:04.786Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-22T21:24:29.562Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Products.razor",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Client\\Pages\\Products.razor",
-              "RelativeDocumentMoniker": "POS.Client\\Pages\\Products.razor",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Client\\Pages\\Products.razor",
-              "RelativeToolTip": "POS.Client\\Pages\\Products.razor",
-              "ViewState": "AgIAALMAAAAAAAAAAAAAAJMAAAAFAAAAAAAAAA==",
+              "Title": "Users.razor",
+              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Client\\Pages\\Users.razor",
+              "RelativeDocumentMoniker": "POS.Client\\Pages\\Users.razor",
+              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Client\\Pages\\Users.razor",
+              "RelativeToolTip": "POS.Client\\Pages\\Users.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-11-20T07:21:41.829Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-22T21:19:09.356Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Client\\Program.cs",
-              "RelativeDocumentMoniker": "POS.Client\\Program.cs",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Client\\Program.cs",
-              "RelativeToolTip": "POS.Client\\Program.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB4AAAADAAAAAAAAAA==",
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "POS.Server\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "POS.Server\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAAAEcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-20T07:18:28.056Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-22T21:17:22.046Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "AuthHeaderHandler.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Client\\Providers\\AuthHeaderHandler.cs",
-              "RelativeDocumentMoniker": "POS.Client\\Providers\\AuthHeaderHandler.cs",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Client\\Providers\\AuthHeaderHandler.cs",
-              "RelativeToolTip": "POS.Client\\Providers\\AuthHeaderHandler.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAAB0AAAABAAAAAAAAAA==",
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Repositories\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "POS.Server\\Repositories\\IUserRepository.cs",
+              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Repositories\\IUserRepository.cs",
+              "RelativeToolTip": "POS.Server\\Repositories\\IUserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-20T07:17:44.957Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-22T21:05:32.182Z"
             }
           ]
         },

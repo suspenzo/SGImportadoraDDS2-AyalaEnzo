@@ -6,6 +6,12 @@ namespace POS.Server.Services
     {
         Task<AuthResponse?> LoginAsync(LoginRequest request);
         Task<AuthResponse?> RegisterAsync(RegisterRequest request);
-        Task<List<UserRequest>> GetAllUsersAsync();
+
+        Task<List<UserResponse>> GetAllUsersAsync();
+
+        Task<UserResponse?> GetUserByIdAsync(int id);
+
+        Task<UserResponse?> UpdateUserAsync(int id, UserRequest request);
+        Task<bool> DeleteUserAsync(int id);
     }
 }

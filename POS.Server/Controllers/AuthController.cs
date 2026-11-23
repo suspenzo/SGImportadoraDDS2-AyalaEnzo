@@ -50,5 +50,23 @@ namespace POS.Server.Controllers
             var users = await _authService.GetAllUsersAsync();
             return Ok(users);
         }
+
+        [HttpPut("{id}")]
+        [Authorize(Roles = "Administrador")]
+        public async Task<ActionResult<UserResponse>> UpdateUser(int id, UserRequest request)
+        {
+            var updated = await _authService.UpdateUserAsync(id, request);
+            if (updated == null) return NotFound("Usuario no encontrado");
+            return Ok(updated);
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrador")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            var deleted = await _authService.DeleteUserAsync(id);
+            if (!deleted) return NotFound("Usuario no encontrado");
+            return NoContent();
+        }
     }
 }

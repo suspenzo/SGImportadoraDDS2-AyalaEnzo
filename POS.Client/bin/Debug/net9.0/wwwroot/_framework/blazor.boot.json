@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "POS.Client",
   "resources": {
-    "hash": "sha256-CpI0OlNV21qT2RAw9PW5xS29lyfWr60gxaM3CswgY8Q=",
+    "hash": "sha256-eqPtF89mVCFIP0U/ePsS2DKWnFjlv+1MHrB5RhkY070=",
     "fingerprinting": {
       "Microsoft.AspNetCore.Authorization.c5r91rmx4p.wasm": "Microsoft.AspNetCore.Authorization.wasm",
       "Microsoft.AspNetCore.Components.o9nwdyd35w.wasm": "Microsoft.AspNetCore.Components.wasm",
@@ -208,10 +208,10 @@
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
       "icudt_EFIGS.tptq2av103.dat": "icudt_EFIGS.dat",
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat",
-      "POS.Shared.k1lh86u4dx.wasm": "POS.Shared.wasm",
-      "POS.Shared.s2niqysva9.pdb": "POS.Shared.pdb",
-      "POS.Client.p1qwlem48k.wasm": "POS.Client.wasm",
-      "POS.Client.fmym4etsvz.pdb": "POS.Client.pdb"
+      "POS.Shared.bqnqv9wiou.wasm": "POS.Shared.wasm",
+      "POS.Shared.e1l16c3b5u.pdb": "POS.Shared.pdb",
+      "POS.Client.116fxc0cm7.wasm": "POS.Client.wasm",
+      "POS.Client.5t4js739tb.pdb": "POS.Client.pdb"
     },
     "jsModuleNative": {
       "dotnet.native.xsn1d6x2kd.js": "sha256-wcPTC3mDpEcT24XjJe50tp5nZPwae2BBvtQVsRs4FN4="
@@ -428,12 +428,12 @@
       "WindowsBase.y8ae02uxne.wasm": "sha256-YpOYeMLDuchOCocYiO5kv2I5pRhSWnQf5dUnxxoLx5U=",
       "mscorlib.psc7ighyl0.wasm": "sha256-d6G5ZJb6YYCRbk8d7mDqZMv6fP4X3DaizvVwaelHRRE=",
       "netstandard.mpl0s8028r.wasm": "sha256-6qlDOZEfxxE8/6gC6pnGt8ZFmV3YnAbNrh8hSJMZXbk=",
-      "POS.Shared.k1lh86u4dx.wasm": "sha256-OLsYHkZyIfy4ppVRhR+D+k8YwXxCIjtxXOj7APmRqvM=",
-      "POS.Client.p1qwlem48k.wasm": "sha256-Iye9Wy+O8ibCz+vGJzDbdHO0rcC3xigBAzw0+LV53to="
+      "POS.Shared.bqnqv9wiou.wasm": "sha256-XUIgkSkfkofVWGgBx3K+xEW2e4CYNiYvxvFIemJVoZg=",
+      "POS.Client.116fxc0cm7.wasm": "sha256-u8IawMJJbu768FMFOSfusV5TPViA5ZR70jgGRtqAaGk="
     },
     "pdb": {
-      "POS.Shared.s2niqysva9.pdb": "sha256-rBih7ZBWfKXnfPTMPVHnXBVXQ+P4uY9yMq1Oxqb9M9U=",
-      "POS.Client.fmym4etsvz.pdb": "sha256-OVs10d5JI3CmeSNFTlDguc6oVC/WVIVs27Iu5etohuU="
+      "POS.Shared.e1l16c3b5u.pdb": "sha256-woYRRzbZEfgZRRTrRl//yCdEGNV7tFOO5NDN4ZR3QZM=",
+      "POS.Client.5t4js739tb.pdb": "sha256-59iDOw6b57zWuwTV+8gkoJCU+nQpDP8g7xQQG0SIHgI="
     }
   },
   "cacheBootResources": true,

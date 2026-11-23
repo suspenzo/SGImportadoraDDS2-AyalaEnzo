@@ -68,7 +68,9 @@ namespace POS.Server.Services
             return new ClientResponse
             {
                 Id = client.Id,
-                NombreCompleto = $"{client.Nombre} {client.APaterno} {client.AMaterno}".Trim(),
+                Nombre = client.Nombre,
+                APaterno = client.APaterno,
+                AMaterno = client.AMaterno,
                 NumDocumento = client.NumDocumento,
                 Email = client.Email,
                 Telefono = client.Telefono,

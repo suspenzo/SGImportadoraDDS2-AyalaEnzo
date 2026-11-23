@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("POS.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+45c71440fc748402c6c639d5a6f331431131d963")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c4c2478361d3e4f2bde74de1927ecb8a827dfb64")]
 [assembly: System.Reflection.AssemblyProductAttribute("POS.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("POS.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

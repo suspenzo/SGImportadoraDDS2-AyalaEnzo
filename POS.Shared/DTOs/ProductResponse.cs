@@ -16,7 +16,6 @@ namespace POS.Shared.DTOs
         public int CategoryID { get; set; }
         public int MarcaID { get; set; }
         public string NombreCategoria { get; set; } = string.Empty; // Mostramos el nombre, no el ID
-        
         public string NombreMarca { get; set; } = string.Empty;
         public string Modelo { get; set; } = string.Empty;
         public decimal PrecioVenta { get; set; }
