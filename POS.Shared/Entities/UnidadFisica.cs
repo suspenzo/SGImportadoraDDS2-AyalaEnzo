@@ -11,13 +11,15 @@ namespace POS.Shared.Entities
     {
         public int Id { get; set; }
         public int IdProducto { get; set; }
-        public int? IdLote { get; set; } // Opcional por ahora
-        public int? IdDetalleVenta { get; set; } // Nulo si aún no se ha vendido
+        public int? IdLote { get; set; }
+        public int? IdDetalleVenta { get; set; }
         public string ImeiSerial { get; set; } = string.Empty;
-        public ItemStatus EstadoUnidad { get; set; } = ItemStatus.Disponible;
+        public EstadoUnidad EstadoUnidad { get; set; } = EstadoUnidad.Disponible;
 
-        // Propiedades de navegación
+        // Navegación
         public Product? Producto { get; set; }
         public DetalleVenta? DetalleVenta { get; set; }
+        public LoteImportacion? Lote { get; set; } // 
+        public Garantia? Garantia { get; set; }    //
     }
 }

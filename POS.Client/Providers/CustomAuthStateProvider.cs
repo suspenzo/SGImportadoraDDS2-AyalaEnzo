@@ -43,5 +43,18 @@ namespace POS.Client.Providers
 
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
         }
+
+        // Método para notificar a Blazor que el usuario se ha deslogueado
+        public async Task MarkUserAsLoggedOut()
+        {
+            // 1. Eliminamos el token del almacenamiento del navegador
+            await _jsRuntime.InvokeVoidAsync("localStorage.removeItem", _tokenKey);
+
+            // 2. Creamos un usuario "anónimo" (sin claims)
+            var anonymousUser = new ClaimsPrincipal(new ClaimsIdentity());
+
+            // 3. Notificamos a Blazor que el estado cambió (esto dispara la redirección al login automáticamente por el AuthorizeRouteView)
+            NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(anonymousUser)));
+        }
     }
 }

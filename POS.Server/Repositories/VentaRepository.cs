@@ -28,7 +28,7 @@ namespace POS.Server.Repositories
                         var unidad = await _context.UnidadesFisicas.FindAsync(idUnidad);
                         if (unidad != null)
                         {
-                            unidad.EstadoUnidad = ItemStatus.Vendido;
+                            unidad.EstadoUnidad = EstadoUnidad.Vendido;
                             unidad.IdDetalleVenta = detalle.Id; // Vinculamos el IMEI al detalle
                         }
                     }

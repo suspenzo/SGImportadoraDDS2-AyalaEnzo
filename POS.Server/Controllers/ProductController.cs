@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using POS.Server.Services;
 using POS.Shared.DTOs;
 
+
 namespace POS.Server.Controllers
 {
     [Route("api/[controller]")]
@@ -11,8 +12,14 @@ namespace POS.Server.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IUnidadFisicaService _unidadFisicaService;
 
-        public ProductController(IProductService productService) => _productService = productService;
+        public ProductController(IProductService productService, IUnidadFisicaService unidadFisicaService)
+        {
+            _productService = productService;
+            _unidadFisicaService = unidadFisicaService; 
+        }
+
 
         [HttpGet]
         public async Task<ActionResult<List<ProductResponse>>> GetAll()
@@ -52,6 +59,15 @@ namespace POS.Server.Controllers
             var deleted = await _productService.DeleteAsync(id);
             if (!deleted) return NotFound("Producto no encontrado");
             return NoContent();
+        }
+
+        [HttpGet("{id}/unidades-disponibles")]
+        [Authorize(Roles = "Administrador,Vendedor")] // Vendedores también pueden ver stock
+        public async Task<ActionResult<List<UnidadFisicaDto>>> GetUnidadesDisponibles(int id)
+        {
+            // Usamos el servicio de UnidadFisica para buscar los IMEIs disponibles
+            var unidades = await _unidadFisicaService.GetDisponiblesByProductoIdAsync(id);
+            return Ok(unidades);
         }
     }
 }

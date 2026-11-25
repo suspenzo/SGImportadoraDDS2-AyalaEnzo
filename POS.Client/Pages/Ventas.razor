@@ -1,0 +1,319 @@
+﻿@page "/ventas"
+@attribute [Authorize(Roles = "Administrador,Vendedor")]
+@using POS.Shared.DTOs
+@using POS.Shared.Enums
+@inject HttpClient Http
+@inject IJSRuntime JSRuntime
+
+<h3 class="mb-4">Punto de Venta</h3>
+
+@if (errorMessage != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @errorMessage
+        <button type="button" class="btn-close" @onclick="() => errorMessage = null"></button>
+    </div>
+}
+@if (successMessage != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @successMessage
+        <button type="button" class="btn-close" @onclick="() => successMessage = null"></button>
+    </div>
+}
+
+<div class="row">
+    <!-- PANEL IZQUIERDO: Selección de Productos -->
+    <div class="col-md-7">
+        <div class="card shadow-sm mb-3">
+            <div class="card-header bg-dark text-white">1. Datos de la Venta</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label>Cliente</label>
+                        <InputSelect @bind-Value="ventaRequest.IdCliente" class="form-select">
+                            <option value="0">-- Seleccione un cliente --</option>
+                            @foreach (var c in clients)
+                            {
+                                <option value="@c.Id">@c.Nombre @c.APaterno - @c.NumDocumento</option>
+                            }
+                        </InputSelect>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Método de Pago</label>
+                        <InputSelect @bind-Value="ventaRequest.MetodoPago" class="form-select">
+                            <option value="@MetodoPago.Efectivo">Efectivo</option>
+                            <option value="@MetodoPago.TarjetaCredito">Tarjeta de Crédito</option>
+                            <option value="@MetodoPago.TarjetaDebito">Tarjeta de Débito</option>
+                            <option value="@MetodoPago.Transferencia">Transferencia</option>
+                        </InputSelect>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">2. Agregar Productos</div>
+            <div class="card-body">
+                <div class="input-group mb-3">
+                    <select class="form-select" @onchange="OnProductSelected">
+                        <option value="0">-- Buscar producto --</option>
+                        @foreach (var p in products)
+                        {
+                            <option value="@p.ProductID">@p.Nombre (@p.Sku) - @p.PrecioVenta.ToString("C")</option>
+                        }
+                    </select>
+                </div>
+
+                @if (selectedProduct != null)
+                {
+                    <div class="alert alert-info py-2">
+                        <strong>@selectedProduct.Nombre</strong> | Precio Unitario: @selectedProduct.PrecioVenta.ToString("C")
+                    </div>
+
+                    <label class="fw-bold mb-2">Seleccione los equipos físicos (IMEI/Serial):</label>
+                    @if (availableUnits.Count == 0)
+                    {
+                        <div class="alert alert-warning py-2">No hay stock disponible de este producto.</div>
+                    }
+                    else
+                    {
+                        <div class="border rounded p-2 mb-3" style="max-height: 200px; overflow-y: auto;">
+                            @foreach (var u in availableUnits)
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox"
+                                           checked="@selectedUnits.Contains(u.Id)"
+                                           @onchange="e => ToggleUnit(u.Id, (bool)e.Value)" />
+                                    <label class="form-check-label">@u.ImeiSerial</label>
+                                </div>
+                            }
+                        </div>
+                        <button class="btn btn-success w-100" @onclick="AddToCart" disabled="@(selectedUnits.Count == 0)">
+                            <span class="oi oi-plus"></span> Añadir al Carrito
+                        </button>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- PANEL DERECHO: Carrito de Compras -->
+    <div class="col-md-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">3. Carrito de Compras</div>
+            <div class="card-body p-0">
+                <table class="table table-sm mb-0">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>IMEIs / Seriales</th>
+                            <th>Subtotal</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (cart.Count == 0)
+                        {
+                            <tr><td colspan="4" class="text-center py-3 text-muted">El carrito está vacío</td></tr>
+                        }
+                        @foreach (var item in cart)
+                        {
+                            <tr>
+                                <td>
+                                    <strong>@item.ProductName</strong><br />
+                                    <small class="text-muted">@item.Price.ToString("C") c/u</small>
+                                </td>
+                                <td>
+                                    @foreach (var serial in item.Serials)
+                                    {
+                                        <span class="badge bg-secondary d-block mb-1">@serial</span>
+                                    }
+                                </td>
+                                <td>@((item.Price * item.Serials.Count).ToString("C"))</td>
+                                <td class="text-end">
+                                    <button class="btn btn-sm btn-outline-danger" @onclick="() => RemoveFromCart(item)" title="Quitar">
+                                        <span class="oi oi-x"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer bg-light">
+                <h4 class="text-end mb-3">Total: <strong>@CalculateTotal().ToString("C")</strong></h4>
+                <button class="btn btn-primary w-100 btn-lg" @onclick="ProcessSale"
+                        disabled="@(cart.Count == 0 || ventaRequest.IdCliente == 0)">
+                    <span class="oi oi-check"></span> Procesar Venta
+                </button>
+                @if (cart.Count > 0 && ventaRequest.IdCliente == 0)
+                {
+                    <small class="text-danger d-block text-center mt-2">Seleccione un cliente para continuar</small>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<ClientResponse> clients = new();
+    private List<ProductResponse> products = new();
+    private List<UnidadFisicaDto> availableUnits = new();
+    private List<int> selectedUnits = new();
+
+    private ProductResponse? selectedProduct;
+    private VentaRequest ventaRequest = new();
+
+    // Clase auxiliar para manejar el carrito visualmente
+    private class CartItem
+    {
+        public int ProductId { get; set; }
+        public string ProductName { get; set; } = string.Empty;
+        public decimal Price { get; set; }
+        public List<string> Serials { get; set; } = new();
+        public List<int> UnitIds { get; set; } = new();
+    }
+
+    private List<CartItem> cart = new();
+    private string? errorMessage;
+    private string? successMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        try
+        {
+            errorMessage = null;
+            clients = await Http.GetFromJsonAsync<List<ClientResponse>>("api/Client") ?? new();
+            products = await Http.GetFromJsonAsync<List<ProductResponse>>("api/Product") ?? new();
+            ventaRequest.MetodoPago = MetodoPago.Efectivo;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al cargar datos iniciales: {ex.Message}";
+        }
+    }
+
+    private async Task OnProductSelected(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out int prodId) && prodId > 0)
+        {
+            selectedProduct = products.FirstOrDefault(p => p.ProductID == prodId);
+            selectedUnits.Clear();
+
+            try
+            {
+                // Llamamos al endpoint del backend
+                availableUnits = await Http.GetFromJsonAsync<List<UnidadFisicaDto>>($"api/Product/{prodId}/unidades-disponibles") ?? new();
+            }
+            catch (Exception ex)
+            {
+                errorMessage = $"Error al buscar stock: {ex.Message}";
+                availableUnits.Clear();
+            }
+        }
+        else
+        {
+            selectedProduct = null;
+            availableUnits.Clear();
+            selectedUnits.Clear();
+        }
+    }
+
+    private void ToggleUnit(int unitId, bool isChecked)
+    {
+        if (isChecked && !selectedUnits.Contains(unitId))
+            selectedUnits.Add(unitId);
+        else if (!isChecked)
+            selectedUnits.Remove(unitId);
+    }
+
+    private void AddToCart()
+    {
+        if (selectedProduct == null || selectedUnits.Count == 0) return;
+
+        var serialsToAdd = availableUnits.Where(u => selectedUnits.Contains(u.Id)).Select(u => u.ImeiSerial).ToList();
+
+        var existingItem = cart.FirstOrDefault(c => c.ProductId == selectedProduct.ProductID);
+
+        if (existingItem != null)
+        {
+            // Agregamos los nuevos IMEIs al item existente en el carrito
+            existingItem.Serials.AddRange(serialsToAdd);
+            existingItem.UnitIds.AddRange(selectedUnits);
+        }
+        else
+        {
+            cart.Add(new CartItem
+            {
+                ProductId = selectedProduct.ProductID,
+                ProductName = selectedProduct.Nombre,
+                Price = selectedProduct.PrecioVenta,
+                Serials = serialsToAdd,
+                UnitIds = new List<int>(selectedUnits)
+            });
+        }
+
+        // Limpiamos la selección para el siguiente producto
+        selectedUnits.Clear();
+        selectedProduct = null;
+        availableUnits.Clear();
+
+        // Forzamos el reinicio del dropdown de productos
+        StateHasChanged();
+    }
+
+    private void RemoveFromCart(CartItem item)
+    {
+        cart.Remove(item);
+    }
+
+    private decimal CalculateTotal()
+    {
+        return cart.Sum(item => item.Price * item.Serials.Count);
+    }
+
+    private async Task ProcessSale()
+    {
+        try
+        {
+            errorMessage = null;
+            successMessage = null;
+
+            // Mapeamos el carrito visual al DTO que espera el Backend
+            ventaRequest.Detalles = cart.Select(item => new DetalleVentaRequest
+            {
+                IdProducto = item.ProductId,
+                IdsUnidadesFisicas = item.UnitIds
+            }).ToList();
+
+            var response = await Http.PostAsJsonAsync("api/Venta", ventaRequest);
+
+            if (response.IsSuccessStatusCode)
+            {
+                successMessage = "¡Venta registrada con éxito! Se ha generado la factura.";
+
+                // Limpiamos el estado para la siguiente venta
+                cart.Clear();
+                ventaRequest.IdCliente = 0;
+                ventaRequest.Detalles.Clear();
+                selectedProduct = null;
+                availableUnits.Clear();
+            }
+            else
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                errorMessage = $"Error del servidor al procesar la venta: {errorContent}";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error de conexión: {ex.Message}";
+        }
+    }
+}

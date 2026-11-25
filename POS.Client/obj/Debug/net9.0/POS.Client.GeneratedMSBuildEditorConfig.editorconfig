@@ -32,10 +32,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Dell/Documents/Desarrollo de Sistemas II/PROJECT/SGImportadora/POS.Client/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Dell/Documents/Desarrollo de Sistemas II/PROJECT/SGImportadora/POS.Client/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -52,8 +48,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlcnMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Dell/Documents/Desarrollo de Sistemas II/PROJECT/SGImportadora/POS.Client/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcV2VhdGhlci5yYXpvcg==
+[C:/Users/Dell/Documents/Desarrollo de Sistemas II/PROJECT/SGImportadora/POS.Client/Pages/Ventas.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmVudGFzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Dell/Documents/Desarrollo de Sistemas II/PROJECT/SGImportadora/POS.Client/RedirectToLogin.razor]

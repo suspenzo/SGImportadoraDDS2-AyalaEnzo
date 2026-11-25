@@ -17,5 +17,20 @@ namespace POS.Server.Data
             public DbSet<DetalleVenta> DetallesVenta { get; set; }
             public DbSet<UnidadFisica> UnidadesFisicas { get; set; }
             public DbSet<Marca> Marcas { get; set; }
-    }
+            public DbSet<Proveedor> Proveedores { get; set; }
+            public DbSet<LoteImportacion> LotesImportacion { get; set; }
+            public DbSet<Garantia> Garantias { get; set; }
+
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+            {
+                base.OnModelCreating(modelBuilder);
+
+                // Configuración de la relación uno a uno entre UnidadFisica y Garantia
+                // Le indicamos a EF Core que la tabla Garantia es la que contiene la llave foránea (IdUnidad)
+                modelBuilder.Entity<UnidadFisica>()
+                    .HasOne(u => u.Garantia)
+                    .WithOne(g => g.UnidadFisica)
+                    .HasForeignKey<Garantia>(g => g.IdUnidad);
+            }
+        }
     }

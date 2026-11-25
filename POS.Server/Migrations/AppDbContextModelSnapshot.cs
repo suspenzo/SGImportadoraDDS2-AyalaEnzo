@@ -118,6 +118,65 @@ namespace POS.Server.Migrations
                     b.ToTable("DetallesVenta");
                 });
 
+            modelBuilder.Entity("POS.Shared.Entities.Garantia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EstadoGarantia")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FechaFin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdUnidad")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdUnidad")
+                        .IsUnique();
+
+                    b.ToTable("Garantias");
+                });
+
+            modelBuilder.Entity("POS.Shared.Entities.LoteImportacion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("CostosFlete")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("FechaLlegada")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdProveedor")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NumeroLote")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProveedorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProveedorId");
+
+                    b.ToTable("LotesImportacion");
+                });
+
             modelBuilder.Entity("POS.Shared.Entities.Marca", b =>
                 {
                     b.Property<int>("MarcaID")
@@ -184,6 +243,35 @@ namespace POS.Server.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("POS.Shared.Entities.Proveedor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaisOrigen")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Proveedores");
+                });
+
             modelBuilder.Entity("POS.Shared.Entities.UnidadFisica", b =>
                 {
                     b.Property<int>("Id")
@@ -211,12 +299,17 @@ namespace POS.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("LoteId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ProductoProductID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DetalleVentaId");
+
+                    b.HasIndex("LoteId");
 
                     b.HasIndex("ProductoProductID");
 
@@ -310,6 +403,26 @@ namespace POS.Server.Migrations
                     b.Navigation("Venta");
                 });
 
+            modelBuilder.Entity("POS.Shared.Entities.Garantia", b =>
+                {
+                    b.HasOne("POS.Shared.Entities.UnidadFisica", "UnidadFisica")
+                        .WithOne("Garantia")
+                        .HasForeignKey("POS.Shared.Entities.Garantia", "IdUnidad")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UnidadFisica");
+                });
+
+            modelBuilder.Entity("POS.Shared.Entities.LoteImportacion", b =>
+                {
+                    b.HasOne("POS.Shared.Entities.Proveedor", "Proveedor")
+                        .WithMany("Lotes")
+                        .HasForeignKey("ProveedorId");
+
+                    b.Navigation("Proveedor");
+                });
+
             modelBuilder.Entity("POS.Shared.Entities.Product", b =>
                 {
                     b.HasOne("POS.Shared.Entities.Category", "Categoria")
@@ -335,11 +448,17 @@ namespace POS.Server.Migrations
                         .WithMany("UnidadesFisicas")
                         .HasForeignKey("DetalleVentaId");
 
+                    b.HasOne("POS.Shared.Entities.LoteImportacion", "Lote")
+                        .WithMany("Unidades")
+                        .HasForeignKey("LoteId");
+
                     b.HasOne("POS.Shared.Entities.Product", "Producto")
                         .WithMany()
                         .HasForeignKey("ProductoProductID");
 
                     b.Navigation("DetalleVenta");
+
+                    b.Navigation("Lote");
 
                     b.Navigation("Producto");
                 });
@@ -369,9 +488,24 @@ namespace POS.Server.Migrations
                     b.Navigation("UnidadesFisicas");
                 });
 
+            modelBuilder.Entity("POS.Shared.Entities.LoteImportacion", b =>
+                {
+                    b.Navigation("Unidades");
+                });
+
             modelBuilder.Entity("POS.Shared.Entities.Marca", b =>
                 {
                     b.Navigation("Productos");
+                });
+
+            modelBuilder.Entity("POS.Shared.Entities.Proveedor", b =>
+                {
+                    b.Navigation("Lotes");
+                });
+
+            modelBuilder.Entity("POS.Shared.Entities.UnidadFisica", b =>
+                {
+                    b.Navigation("Garantia");
                 });
 
             modelBuilder.Entity("POS.Shared.Entities.Venta", b =>

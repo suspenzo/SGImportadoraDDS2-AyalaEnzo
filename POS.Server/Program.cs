@@ -37,6 +37,19 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IMarcaRepository, MarcaRepository>();
 builder.Services.AddScoped<IMarcaService, MarcaService>();
 
+builder.Services.AddScoped<IProveedorRepository, ProveedorRepository>();
+builder.Services.AddScoped<IProveedorService, ProveedorService>();
+
+builder.Services.AddScoped<ILoteImportacionRepository, LoteImportacionRepository>();
+builder.Services.AddScoped<ILoteImportacionService, LoteImportacionService>();
+
+builder.Services.AddScoped<IUnidadFisicaRepository, UnidadFisicaRepository>();
+builder.Services.AddScoped<IUnidadFisicaService, UnidadFisicaService>();
+
+builder.Services.AddScoped<IGarantiaRepository, GarantiaRepository>();
+builder.Services.AddScoped<IGarantiaService, GarantiaService>();
+// Agrega también los de Garantía y UnidadFisica cuando los crees...
+
 //  CONFIGURACIÓN JWT 
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var key = Encoding.UTF8.GetBytes(jwtSettings["SecretKey"]!);
