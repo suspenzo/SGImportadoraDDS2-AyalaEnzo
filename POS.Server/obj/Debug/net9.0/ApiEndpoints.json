@@ -450,6 +450,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "POS.Server.Controllers.LoteImportacionController",
+    "Method": "CreateConUnidades",
+    "RelativePath": "api/LoteImportacion/con-unidades",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "POS.Shared.DTOs.LoteImportacionRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "POS.Server.Controllers.MarcaController",
     "Method": "GetAll",
     "RelativePath": "api/Marca",
@@ -641,6 +657,26 @@
     ]
   },
   {
+    "ContainingType": "POS.Server.Controllers.ProductController",
+    "Method": "GetInventario",
+    "RelativePath": "api/Product/inventario",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[POS.Shared.DTOs.ProductoInventarioDto, POS.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "POS.Server.Controllers.ProveedorController",
     "Method": "GetAll",
     "RelativePath": "api/Proveedor",
@@ -697,5 +733,31 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "POS.Server.Controllers.VentaController",
+    "Method": "GetComprobante",
+    "RelativePath": "api/Venta/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "POS.Shared.DTOs.VentaResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

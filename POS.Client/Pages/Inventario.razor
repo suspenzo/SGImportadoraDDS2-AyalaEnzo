@@ -1,0 +1,356 @@
+﻿@page "/inventario"
+@attribute [Authorize(Roles = "Administrador,Bodeguero")]
+@using POS.Shared.DTOs
+@inject HttpClient Http
+@inject IJSRuntime JS
+
+<h3 class="mb-4">Gestión de Inventario y Lotes</h3>
+
+@if (errorMessage != null)
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+@if (successMessage != null)
+{
+    <div class="alert alert-success">@successMessage</div>
+}
+
+<!-- BOTONES DE ACCIÓN -->
+<div class="mb-4">
+    <button class="btn btn-primary me-2" @onclick="MostrarFormularioLote">Registrar Nuevo Lote de Importación</button>
+    <button class="btn btn-success" @onclick="MostrarFormularioProveedor">Añadir Nuevo Proveedor</button>
+</div>
+
+<!-- NUEVO FORMULARIO PROVEEDOR -->
+@if (mostrarFormularioProveedor)
+{
+    <div class="card shadow-sm mb-4 border-success">
+        <div class="card-header bg-success text-white">Registrar Nuevo Proveedor</div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label>Nombre / Razón Social *</label>
+                    <input type="text" @bind="nuevoProveedor.Nombre" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <label>NIT *</label>
+                    <input type="text" @bind="nuevoProveedor.Nit" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <label>País de Origen</label>
+                    <input type="text" @bind="nuevoProveedor.PaisOrigen" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <label>Teléfono</label>
+                    <input type="text" @bind="nuevoProveedor.Telefono" class="form-control" />
+                </div>
+            </div>
+            <div class="text-end">
+                <button class="btn btn-secondary me-2" @onclick="CancelarProveedor">Cancelar</button>
+                <button class="btn btn-success" @onclick="GuardarProveedor" disabled="@(string.IsNullOrWhiteSpace(nuevoProveedor.Nombre) || string.IsNullOrWhiteSpace(nuevoProveedor.Nit))">Guardar Proveedor</button>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- FORMULARIO NUEVO LOTE (TU CÓDIGO ORIGINAL) -->
+@if (mostrarFormulario)
+{
+    <div class="card shadow-sm mb-4 border-primary">
+        <div class="card-header bg-primary text-white">Nuevo Lote de Importación</div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label>Proveedor</label>
+                    <select @bind="nuevoLote.IdProveedor" class="form-select">
+                        <option value="0">-- Seleccione --</option>
+                        @foreach (var p in proveedores)
+                        {
+                            <option value="@p.Id">@p.Nombre</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label>Número de Lote</label>
+                    <input type="text" @bind="nuevoLote.NumeroLote" class="form-control" placeholder="Ej: LOTE-2024-01" />
+                </div>
+                <div class="col-md-4">
+                    <label>Costo de Flete ($)</label>
+                    <input type="number" @bind="nuevoLote.CostosFlete" class="form-control" />
+                </div>
+            </div>
+
+            <hr />
+            <h5>Agregar Equipos al Lote</h5>
+            <div class="row mb-3 align-items-end">
+                <div class="col-md-5">
+                    <label>Producto</label>
+                    <select @bind="productoSeleccionadoId" class="form-select">
+                        <option value="0">-- Seleccione Producto --</option>
+                        @foreach (var prod in productos)
+                        {
+                            <option value="@prod.ProductID">@prod.Nombre (@prod.Sku)</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <label>IMEIs / Seriales (separados por coma o salto de línea)</label>
+                    <textarea @bind="serialesInput" class="form-control" rows="2" placeholder="Ej: 123456789, 987654321"></textarea>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-success w-100" @onclick="AgregarUnidadesAlLote" disabled="@(productoSeleccionadoId == 0 || string.IsNullOrWhiteSpace(serialesInput))">Añadir</button>
+                </div>
+            </div>
+
+            <!-- Tabla temporal del lote -->
+            @if (unidadesTemporales.Count > 0)
+            {
+                <table class="table table-sm table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>IMEI / Serial</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var uni in unidadesTemporales)
+                        {
+                            <tr>
+                                <td>@productos.FirstOrDefault(p => p.ProductID == uni.Id)?.Nombre</td>
+                                <td>@uni.ImeiSerial</td>
+                                <td><button class="btn btn-sm btn-outline-danger" @onclick="() => QuitarUnidad(uni)">X</button></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="text-end">
+                    <button class="btn btn-secondary me-2" @onclick="CancelarLote">Cancelar</button>
+                    <button class="btn btn-primary" @onclick="GuardarLote">Guardar Lote Completo</button>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+<!-- TABLA DE INVENTARIO (TU CÓDIGO ORIGINAL) -->
+<table class="table table-hover shadow-sm">
+    <thead class="table-dark">
+        <tr>
+            <th>Producto</th>
+            <th>SKU</th>
+            <th>Stock Disponible</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (inventario == null)
+        {
+            <tr><td colspan="4" class="text-center">Cargando inventario...</td></tr>
+        }
+        else
+        {
+            @foreach (var item in inventario)
+            {
+                <tr>
+                    <td>@item.Nombre</td>
+                    <td>@item.Sku</td>
+                    <td>
+                        <span class="badge @(item.StockDisponible > 0 ? "bg-success" : "bg-danger")">
+                            @item.StockDisponible unidades
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-info" @onclick="() => ToggleDetalles(item.ProductID)">
+                            @(expandedProductId == item.ProductID ? "Ocultar IMEIs" : "Ver IMEIs")
+                        </button>
+                    </td>
+                </tr>
+                @if (expandedProductId == item.ProductID)
+                {
+                    <tr>
+                        <td colspan="4" class="bg-light">
+                            <div class="p-2">
+                                <strong>Seriales Disponibles:</strong>
+                                <ul class="mb-0">
+                                    @foreach (var u in item.Unidades)
+                                    {
+                                        <li>@u.ImeiSerial</li>
+                                    }
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<ProductoInventarioDto>? inventario;
+    private List<ProveedorResponseDto> proveedores = new();
+    private List<ProductResponse> productos = new();
+
+    private bool mostrarFormulario = false;
+    private LoteImportacionRequestDto nuevoLote = new();
+    private List<UnidadFisicaDto> unidadesTemporales = new();
+
+    private int productoSeleccionadoId = 0;
+    private string serialesInput = string.Empty;
+    private int? expandedProductId = null;
+
+    private string? errorMessage;
+    private string? successMessage;
+
+    //  NUEVAS VARIABLES PARA EL PROVEEDOR 
+    private bool mostrarFormularioProveedor = false;
+    private ProveedorRequestDto nuevoProveedor = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        try
+        {
+            inventario = await Http.GetFromJsonAsync<List<ProductoInventarioDto>>("api/Product/inventario");
+            proveedores = await Http.GetFromJsonAsync<List<ProveedorResponseDto>>("api/Proveedor") ?? new();
+            productos = await Http.GetFromJsonAsync<List<ProductResponse>>("api/Product") ?? new();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al cargar datos: {ex.Message}";
+        }
+    }
+
+    private void ToggleDetalles(int id)
+    {
+        expandedProductId = expandedProductId == id ? null : id;
+    }
+
+    // ==========================================
+    // LÓGICA DE PROVEEDOR (NUEVO)
+    // ==========================================
+    private void MostrarFormularioProveedor()
+    {
+        mostrarFormularioProveedor = true;
+        nuevoProveedor = new ProveedorRequestDto();
+        mostrarFormulario = false; // Cerramos el de lote si estaba abierto
+    }
+
+    private void CancelarProveedor()
+    {
+        mostrarFormularioProveedor = false;
+    }
+
+    private async Task GuardarProveedor()
+    {
+        try
+        {
+            errorMessage = null;
+            var response = await Http.PostAsJsonAsync("api/Proveedor", nuevoProveedor);
+
+            if (response.IsSuccessStatusCode)
+            {
+                successMessage = "Proveedor registrado correctamente.";
+                mostrarFormularioProveedor = false;
+                await LoadData(); // Recargamos para que aparezca en el selector de lotes
+            }
+            else
+            {
+                errorMessage = "Error al guardar proveedor: " + await response.Content.ReadAsStringAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error de red: {ex.Message}";
+        }
+    }
+
+    // ==========================================
+    // LÓGICA DE LOTE
+    // ==========================================
+    private void MostrarFormularioLote()
+    {
+        mostrarFormulario = true;
+        nuevoLote = new LoteImportacionRequestDto();
+        unidadesTemporales.Clear();
+        mostrarFormularioProveedor = false; // Cerramos el de proveedor si estaba abierto
+    }
+
+    private void CancelarLote()
+    {
+        mostrarFormulario = false;
+    }
+
+    private void AgregarUnidadesAlLote()
+    {
+        if (productoSeleccionadoId == 0 || string.IsNullOrWhiteSpace(serialesInput)) return;
+
+        // Separamos los seriales por coma o por salto de línea
+        var seriales = serialesInput.Split(new[] { ',', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (var serial in seriales)
+        {
+            var serialLimpio = serial.Trim();
+            if (!string.IsNullOrEmpty(serialLimpio))
+            {
+                unidadesTemporales.Add(new UnidadFisicaDto
+                {
+                    Id = productoSeleccionadoId, // Nota: Asignando el Id del producto al Id del DTO
+                    ImeiSerial = serialLimpio
+                });
+            }
+        }
+
+        // Limpiamos los inputs
+        productoSeleccionadoId = 0;
+        serialesInput = string.Empty;
+    }
+
+    private void QuitarUnidad(UnidadFisicaDto unidad)
+    {
+        unidadesTemporales.Remove(unidad);
+    }
+
+    private async Task GuardarLote()
+    {
+        if (nuevoLote.IdProveedor == 0 || string.IsNullOrWhiteSpace(nuevoLote.NumeroLote))
+        {
+            errorMessage = "Debe seleccionar un proveedor y un número de lote.";
+            return;
+        }
+        if (unidadesTemporales.Count == 0)
+        {
+            errorMessage = "Debe agregar al menos un equipo al lote.";
+            return;
+        }
+
+        try
+        {
+            // Nota: Si tu LoteImportacionRequestDto no tiene una propiedad 'Unidades',
+            // esto podría marcar error. Deberías usar LoteConUnidadesRequestDto como te sugerí antes.
+            nuevoLote.Unidades = unidadesTemporales;
+
+            var response = await Http.PostAsJsonAsync("api/LoteImportacion/con-unidades", nuevoLote);
+
+            if (response.IsSuccessStatusCode)
+            {
+                successMessage = "Lote registrado y stock actualizado correctamente.";
+                mostrarFormulario = false;
+                await LoadData(); // Recargamos el inventario para ver el nuevo stock
+            }
+            else
+            {
+                errorMessage = "Error al guardar el lote: " + await response.Content.ReadAsStringAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error de red: {ex.Message}";
+        }
+    }
+}

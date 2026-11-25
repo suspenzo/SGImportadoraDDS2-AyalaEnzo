@@ -29,7 +29,18 @@
         <a href="." class="reload">Reload</a>
         <span class="dismiss">🗙</span>
     </div>
+
+    <!-- 1. Librerías externas para PDF y Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <!-- 2. Tu script personalizado (Asegúrate de tener el archivo en wwwroot/js/exportar.js) -->
+    <script src="js/exportar.js"></script>
+
+    <!-- 3. Blazor (Debe ir al final para que cargue después de las librerías) -->
     <script src="_framework/blazor.webassembly.js"></script>
+
+    <!-- 4. Service Worker (Para PWA, si lo estás usando) -->
     <script>navigator.serviceWorker.register('service-worker.js');</script>
 </body>
 

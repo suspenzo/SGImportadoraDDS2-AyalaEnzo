@@ -12,6 +12,7 @@ namespace POS.Shared.DTOs
         public string NumeroLote { get; set; } = string.Empty;
         public DateTime FechaLlegada { get; set; }
         public decimal CostosFlete { get; set; }
+        public List<UnidadFisicaDto> Unidades { get; set; } = new();
     }
 
     public class LoteImportacionResponseDto

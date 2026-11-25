@@ -3,72 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DFDF048C-E798-4485-85A0-93EDEDB59CA3}|POS.Client\\POS.Client.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.client\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DFDF048C-E798-4485-85A0-93EDEDB59CA3}|POS.Client\\POS.Client.csproj|solutionrelative:pos.client\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DFDF048C-E798-4485-85A0-93EDEDB59CA3}|POS.Client\\POS.Client.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.client\\pages\\ventas.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DFDF048C-E798-4485-85A0-93EDEDB59CA3}|POS.Client\\POS.Client.csproj|solutionrelative:pos.client\\pages\\ventas.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.server\\services\\igarantiaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|solutionrelative:pos.server\\services\\igarantiaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.server\\repositories\\garantiarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|solutionrelative:pos.server\\repositories\\garantiarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.server\\repositories\\igarantiarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|solutionrelative:pos.server\\repositories\\igarantiarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.server\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|solutionrelative:pos.server\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.server\\controllers\\unidadfisicacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|solutionrelative:pos.server\\controllers\\unidadfisicacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.server\\services\\unidadfisicaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|solutionrelative:pos.server\\services\\unidadfisicaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.server\\services\\iunidadfisicaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|solutionrelative:pos.server\\services\\iunidadfisicaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.server\\repositories\\unidadfisicarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|solutionrelative:pos.server\\repositories\\unidadfisicarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.server\\repositories\\iunidadfisicarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|solutionrelative:pos.server\\repositories\\iunidadfisicarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E51F58A-26F2-4D6C-BB0E-D420B012AD0C}|POS.Shared\\POS.Shared.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.shared\\dtos\\unidadfisicadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E51F58A-26F2-4D6C-BB0E-D420B012AD0C}|POS.Shared\\POS.Shared.csproj|solutionrelative:pos.shared\\dtos\\unidadfisicadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DFDF048C-E798-4485-85A0-93EDEDB59CA3}|POS.Client\\POS.Client.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.client\\pages\\inventario.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DFDF048C-E798-4485-85A0-93EDEDB59CA3}|POS.Client\\POS.Client.csproj|solutionrelative:pos.client\\pages\\inventario.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2E51F58A-26F2-4D6C-BB0E-D420B012AD0C}|POS.Shared\\POS.Shared.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.shared\\entities\\unidadfisica.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2E51F58A-26F2-4D6C-BB0E-D420B012AD0C}|POS.Shared\\POS.Shared.csproj|solutionrelative:pos.shared\\entities\\unidadfisica.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E51F58A-26F2-4D6C-BB0E-D420B012AD0C}|POS.Shared\\POS.Shared.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.shared\\dtos\\ventarequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E51F58A-26F2-4D6C-BB0E-D420B012AD0C}|POS.Shared\\POS.Shared.csproj|solutionrelative:pos.shared\\dtos\\ventarequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.server\\services\\loteimportacionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|solutionrelative:pos.server\\services\\loteimportacionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.server\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|solutionrelative:pos.server\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.server\\repositories\\ventarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|solutionrelative:pos.server\\repositories\\ventarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.server\\controllers\\proveedorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|solutionrelative:pos.server\\controllers\\proveedorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|c:\\users\\dell\\documents\\desarrollo de sistemas ii\\project\\sgimportadora\\pos.server\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60D9AC96-3A1D-4A77-8574-A386B1D888A8}|POS.Server\\POS.Server.csproj|solutionrelative:pos.server\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -151,222 +99,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "NavMenu.razor",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Client\\Layout\\NavMenu.razor",
-              "RelativeDocumentMoniker": "POS.Client\\Layout\\NavMenu.razor",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Client\\Layout\\NavMenu.razor",
-              "RelativeToolTip": "POS.Client\\Layout\\NavMenu.razor",
-              "ViewState": "AgIAABcAAAAAAAAAAAAAACcAAAAWAAAAAAAAAA==",
+              "Title": "Inventario.razor",
+              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Client\\Pages\\Inventario.razor",
+              "RelativeDocumentMoniker": "POS.Client\\Pages\\Inventario.razor",
+              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Client\\Pages\\Inventario.razor",
+              "RelativeToolTip": "POS.Client\\Pages\\Inventario.razor",
+              "ViewState": "AgIAAEIBAAAAAAAAAAAYwFoBAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-11-25T00:16:52.13Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IGarantiaService.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Services\\IGarantiaService.cs",
-              "RelativeDocumentMoniker": "POS.Server\\Services\\IGarantiaService.cs",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Services\\IGarantiaService.cs",
-              "RelativeToolTip": "POS.Server\\Services\\IGarantiaService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-25T00:10:05.722Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GarantiaRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Repositories\\GarantiaRepository.cs",
-              "RelativeDocumentMoniker": "POS.Server\\Repositories\\GarantiaRepository.cs",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Repositories\\GarantiaRepository.cs",
-              "RelativeToolTip": "POS.Server\\Repositories\\GarantiaRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-25T00:09:30.372Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IGarantiaRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Repositories\\IGarantiaRepository.cs",
-              "RelativeDocumentMoniker": "POS.Server\\Repositories\\IGarantiaRepository.cs",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Repositories\\IGarantiaRepository.cs",
-              "RelativeToolTip": "POS.Server\\Repositories\\IGarantiaRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-25T00:08:52.458Z",
+              "WhenOpened": "2026-11-25T14:31:34.545Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Ventas.razor",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Client\\Pages\\Ventas.razor",
-              "RelativeDocumentMoniker": "POS.Client\\Pages\\Ventas.razor",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Client\\Pages\\Ventas.razor",
-              "RelativeToolTip": "POS.Client\\Pages\\Ventas.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMAAAABBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-11-24T20:45:07.379Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ProductController.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Controllers\\ProductController.cs",
-              "RelativeDocumentMoniker": "POS.Server\\Controllers\\ProductController.cs",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Controllers\\ProductController.cs",
-              "RelativeToolTip": "POS.Server\\Controllers\\ProductController.cs",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAABMAAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-24T20:53:37.283Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UnidadFisicaController.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Controllers\\UnidadFisicaController.cs",
-              "RelativeDocumentMoniker": "POS.Server\\Controllers\\UnidadFisicaController.cs",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Controllers\\UnidadFisicaController.cs",
-              "RelativeToolTip": "POS.Server\\Controllers\\UnidadFisicaController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-24T20:52:44.129Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "UnidadFisicaService.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Services\\UnidadFisicaService.cs",
-              "RelativeDocumentMoniker": "POS.Server\\Services\\UnidadFisicaService.cs",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Services\\UnidadFisicaService.cs",
-              "RelativeToolTip": "POS.Server\\Services\\UnidadFisicaService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-24T20:51:29.449Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "IUnidadFisicaService.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Services\\IUnidadFisicaService.cs",
-              "RelativeDocumentMoniker": "POS.Server\\Services\\IUnidadFisicaService.cs",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Services\\IUnidadFisicaService.cs",
-              "RelativeToolTip": "POS.Server\\Services\\IUnidadFisicaService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-24T20:51:00.775Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "UnidadFisicaRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Repositories\\UnidadFisicaRepository.cs",
-              "RelativeDocumentMoniker": "POS.Server\\Repositories\\UnidadFisicaRepository.cs",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Repositories\\UnidadFisicaRepository.cs",
-              "RelativeToolTip": "POS.Server\\Repositories\\UnidadFisicaRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-24T20:49:29.449Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "IUnidadFisicaRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Repositories\\IUnidadFisicaRepository.cs",
-              "RelativeDocumentMoniker": "POS.Server\\Repositories\\IUnidadFisicaRepository.cs",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Repositories\\IUnidadFisicaRepository.cs",
-              "RelativeToolTip": "POS.Server\\Repositories\\IUnidadFisicaRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-24T20:49:06.789Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "UnidadFisicaDto.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Shared\\DTOs\\UnidadFisicaDto.cs",
-              "RelativeDocumentMoniker": "POS.Shared\\DTOs\\UnidadFisicaDto.cs",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Shared\\DTOs\\UnidadFisicaDto.cs",
-              "RelativeToolTip": "POS.Shared\\DTOs\\UnidadFisicaDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-24T20:47:53.851Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
               "Title": "UnidadFisica.cs",
               "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Shared\\Entities\\UnidadFisica.cs",
               "RelativeDocumentMoniker": "POS.Shared\\Entities\\UnidadFisica.cs",
               "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Shared\\Entities\\UnidadFisica.cs",
               "RelativeToolTip": "POS.Shared\\Entities\\UnidadFisica.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAADwvxgAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAABQAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-24T20:47:08.979Z",
+              "WhenOpened": "2026-11-25T14:10:06.062Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "POS.Server\\Data\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "POS.Server\\Data\\AppDbContext.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAgwB4AAAAsAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "LoteImportacionService.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Services\\LoteImportacionService.cs",
+              "RelativeDocumentMoniker": "POS.Server\\Services\\LoteImportacionService.cs",
+              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Services\\LoteImportacionService.cs",
+              "RelativeToolTip": "POS.Server\\Services\\LoteImportacionService.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAAAoAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-24T20:38:00.659Z",
+              "WhenOpened": "2026-11-25T13:42:04.263Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "VentaRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Repositories\\VentaRepository.cs",
-              "RelativeDocumentMoniker": "POS.Server\\Repositories\\VentaRepository.cs",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Repositories\\VentaRepository.cs",
-              "RelativeToolTip": "POS.Server\\Repositories\\VentaRepository.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAAAB4AAABHAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "POS.Server\\Controllers\\ProductController.cs",
+              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "POS.Server\\Controllers\\ProductController.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAAAF8AAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-24T20:34:51.527Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "VentaRequest.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Shared\\DTOs\\VentaRequest.cs",
-              "RelativeDocumentMoniker": "POS.Shared\\DTOs\\VentaRequest.cs",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Shared\\DTOs\\VentaRequest.cs",
-              "RelativeToolTip": "POS.Shared\\DTOs\\VentaRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-24T20:32:47.194Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "ProveedorController.cs",
-              "DocumentMoniker": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Controllers\\ProveedorController.cs",
-              "RelativeDocumentMoniker": "POS.Server\\Controllers\\ProveedorController.cs",
-              "ToolTip": "C:\\Users\\Dell\\Documents\\Desarrollo de Sistemas II\\PROJECT\\SGImportadora\\POS.Server\\Controllers\\ProveedorController.cs",
-              "RelativeToolTip": "POS.Server\\Controllers\\ProveedorController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-24T20:22:50.819Z",
+              "WhenOpened": "2026-11-25T13:35:47.653Z",
               "EditorCaption": ""
             }
           ]

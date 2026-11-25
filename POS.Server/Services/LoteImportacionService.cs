@@ -1,16 +1,22 @@
-﻿using POS.Server.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using POS.Server.Repositories;
 using POS.Shared.DTOs;
 using POS.Shared.Entities;
+using POS.Shared.Enums;
+using POS.Server.Data;
+
 
 namespace POS.Server.Services
 {
     public class LoteImportacionService : ILoteImportacionService
     {
         private readonly ILoteImportacionRepository _repository;
+        private readonly AppDbContext _context;
 
-        public LoteImportacionService(ILoteImportacionRepository repository)
+        public LoteImportacionService(ILoteImportacionRepository repository, AppDbContext context)
         {
             _repository = repository;
+            _context = context;
         }
 
         public async Task<List<LoteImportacionResponseDto>> GetAllAsync()
@@ -31,14 +37,25 @@ namespace POS.Server.Services
             {
                 IdProveedor = request.IdProveedor,
                 NumeroLote = request.NumeroLote,
-                FechaLlegada = request.FechaLlegada,
+                FechaLlegada = DateTime.Now,
                 CostosFlete = request.CostosFlete
             };
 
-            var created = await _repository.CreateAsync(nuevoLote);
+            var createdLote = await _repository.CreateAsync(nuevoLote);
 
-            // Al usar el repositorio, este ya nos devuelve el lote con el proveedor incluido
-            return MapToResponseDto(created);
+            // Ahora guardamos las unidades físicas asociadas a este lote
+            var nuevasUnidades = request.Unidades.Select(u => new UnidadFisica
+            {
+                IdProducto = u.Id,
+                IdLote = createdLote.Id,
+                ImeiSerial = u.ImeiSerial,
+                EstadoUnidad = EstadoUnidad.Disponible
+            }).ToList();
+
+            _context.UnidadesFisicas.AddRange(nuevasUnidades);
+            await _context.SaveChangesAsync();
+
+            return new LoteImportacionResponseDto { Id = createdLote.Id, NumeroLote = createdLote.NumeroLote };
         }
 
         public async Task<LoteImportacionResponseDto?> UpdateAsync(int id, LoteImportacionRequestDto request)

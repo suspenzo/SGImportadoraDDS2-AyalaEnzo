@@ -54,8 +54,9 @@ namespace POS.Server.Repositories
 
         public async Task<Venta?> GetVentaByIdAsync(int id) =>
             await _context.Ventas
-                .Include(v => v.Detalles)
-                .ThenInclude(d => d.UnidadesFisicas)
+                .Include(v => v.Cliente)
+                .Include(v => v.Detalles).ThenInclude(d => d.Producto)
+                .Include(v => v.Detalles).ThenInclude(d => d.UnidadesFisicas)
                 .FirstOrDefaultAsync(v => v.Id == id);
     }
 }

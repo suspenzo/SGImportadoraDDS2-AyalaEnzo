@@ -32,8 +32,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Dell/Documents/Desarrollo de Sistemas II/PROJECT/SGImportadora/POS.Client/Pages/Garantia.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR2FyYW50aWEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Dell/Documents/Desarrollo de Sistemas II/PROJECT/SGImportadora/POS.Client/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dell/Documents/Desarrollo de Sistemas II/PROJECT/SGImportadora/POS.Client/Pages/Inventario.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW52ZW50YXJpby5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Dell/Documents/Desarrollo de Sistemas II/PROJECT/SGImportadora/POS.Client/Pages/Login.razor]

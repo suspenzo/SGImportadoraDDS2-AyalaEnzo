@@ -31,6 +31,11 @@ namespace POS.Server.Data
                     .HasOne(u => u.Garantia)
                     .WithOne(g => g.UnidadFisica)
                     .HasForeignKey<Garantia>(g => g.IdUnidad);
-            }
+
+            modelBuilder.Entity<DetalleVenta>()
+                    .HasOne(d => d.Producto)
+                    .WithMany() // Si tu entidad Product no tiene una lista de Detalles, déjalo vacío
+                    .HasForeignKey(d => d.IdProducto);
+        }
         }
     }

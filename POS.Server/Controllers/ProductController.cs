@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using POS.Server.Services;
 using POS.Shared.DTOs;
+using POS.Server.Data;
 
 
 namespace POS.Server.Controllers
@@ -13,12 +15,17 @@ namespace POS.Server.Controllers
     {
         private readonly IProductService _productService;
         private readonly IUnidadFisicaService _unidadFisicaService;
+        private readonly AppDbContext _context;
 
-        public ProductController(IProductService productService, IUnidadFisicaService unidadFisicaService)
-        {
-            _productService = productService;
-            _unidadFisicaService = unidadFisicaService; 
-        }
+        public ProductController(
+            IProductService productService,
+            IUnidadFisicaService unidadFisicaService,
+            AppDbContext context)
+            {
+                _productService = productService;
+                _unidadFisicaService = unidadFisicaService;
+                _context = context; 
+            }
 
 
         [HttpGet]
@@ -68,6 +75,30 @@ namespace POS.Server.Controllers
             // Usamos el servicio de UnidadFisica para buscar los IMEIs disponibles
             var unidades = await _unidadFisicaService.GetDisponiblesByProductoIdAsync(id);
             return Ok(unidades);
+        }
+
+        [HttpGet("inventario")]
+        [Authorize(Roles = "Administrador,Almacenero")]
+        public async Task<ActionResult<List<ProductoInventarioDto>>> GetInventario()
+        {
+            // Buscamos todas las unidades disponibles y las agrupamos por producto
+            var unidades = await _context.UnidadesFisicas
+                .Include(u => u.Producto)
+                .Where(u => u.EstadoUnidad == POS.Shared.Enums.EstadoUnidad.Disponible)
+                .ToListAsync();
+
+            var inventario = unidades
+                .GroupBy(u => u.IdProducto)
+                .Select(g => new ProductoInventarioDto
+                {
+                    ProductID = g.Key,
+                    Nombre = g.First().Producto?.Nombre ?? "Desconocido",
+                    Sku = g.First().Producto?.Sku ?? "N/A",
+                    StockDisponible = g.Count(),
+                    Unidades = g.Select(u => new UnidadFisicaDto { Id = u.Id, ImeiSerial = u.ImeiSerial }).ToList()
+                }).ToList();
+
+            return Ok(inventario);
         }
     }
 }

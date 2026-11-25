@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace POS.Shared.Entities
 {
@@ -17,6 +18,7 @@ namespace POS.Shared.Entities
         public EstadoUnidad EstadoUnidad { get; set; } = EstadoUnidad.Disponible;
 
         // Navegación
+        [ForeignKey("IdProducto")]
         public Product? Producto { get; set; }
         public DetalleVenta? DetalleVenta { get; set; }
         public LoteImportacion? Lote { get; set; } // 

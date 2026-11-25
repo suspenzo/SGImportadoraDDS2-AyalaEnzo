@@ -4,6 +4,7 @@
 @using POS.Shared.Enums
 @inject HttpClient Http
 @inject IJSRuntime JSRuntime
+@inject NavigationManager Navigation
 
 <h3 class="mb-4">Punto de Venta</h3>
 
@@ -179,6 +180,13 @@
     private string? errorMessage;
     private string? successMessage;
 
+    // Clase auxiliar para leer la respuesta del POST de la venta
+    private class VentaPostResponse
+    {
+        public int IdVenta { get; set; }
+        public string Mensaje { get; set; } = string.Empty;
+    }
+
     protected override async Task OnInitializedAsync()
     {
         await LoadData();
@@ -296,7 +304,8 @@
 
             if (response.IsSuccessStatusCode)
             {
-                successMessage = "¡Venta registrada con éxito! Se ha generado la factura.";
+                // 👇 MODIFICACIÓN: Leemos la respuesta de la API para obtener el ID generado
+                var result = await response.Content.ReadFromJsonAsync<VentaPostResponse>();
 
                 // Limpiamos el estado para la siguiente venta
                 cart.Clear();
@@ -304,6 +313,17 @@
                 ventaRequest.Detalles.Clear();
                 selectedProduct = null;
                 availableUnits.Clear();
+
+                if (result != null && result.IdVenta > 0)
+                {
+                    // Redirigimos a la página del comprobante/garantía
+                    Navigation.NavigateTo($"/garantia/{result.IdVenta}");
+                }
+                else
+                {
+                    // Fallback por si el backend no devolvió el formato esperado
+                    successMessage = "¡Venta registrada con éxito!";
+                }
             }
             else
             {

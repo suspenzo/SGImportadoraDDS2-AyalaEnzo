@@ -8,6 +8,7 @@ namespace POS.Server.Services
         Task<LoteImportacionResponseDto?> GetByIdAsync(int id);
         Task<LoteImportacionResponseDto> CreateAsync(LoteImportacionRequestDto request);
         Task<LoteImportacionResponseDto?> UpdateAsync(int id, LoteImportacionRequestDto request);
+
         Task<bool> DeleteAsync(int id);
     }
 }

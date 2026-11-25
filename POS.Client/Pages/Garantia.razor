@@ -1,0 +1,120 @@
+﻿@page "/garantia/{idVenta:int}"
+@attribute [Authorize(Roles = "Administrador,Vendedor")]
+@using POS.Shared.DTOs
+@inject HttpClient Http
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+
+<h3 class="mb-4">Comprobante de Venta y Garantía</h3>
+
+@if (comprobante == null)
+{
+    <div class="alert alert-info">Cargando comprobante...</div>
+}
+else
+{
+    <div class="mb-3">
+        <button class="btn btn-danger me-2" @onclick="DescargarPDF">
+            <span class="oi oi-document"></span> Exportar PDF
+        </button>
+        <button class="btn btn-success me-2" @onclick="DescargarExcel">
+            <span class="oi oi-spreadsheet"></span> Exportar Excel
+        </button>
+        <button class="btn btn-secondary" @onclick="VolverAlPOS">
+            <span class="oi oi-arrow-left"></span> Volver al POS
+        </button>
+    </div>
+
+    <!-- Este div es el que se va a exportar -->
+    <div id="comprobanteArea" class="card shadow-sm p-4">
+        <div class="text-center mb-4">
+            <h2>SG Importadora</h2>
+            <p class="mb-0">NIT: 123456789-0</p>
+            <p>Factura N°: @comprobante.IdVenta</p>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-6">
+                <strong>Cliente:</strong> @comprobante.ClienteNombre<br />
+                <strong>Documento:</strong> @comprobante.ClienteDocumento<br />
+            </div>
+            <div class="col-6 text-end">
+                <strong>Fecha:</strong> @comprobante.Fecha.ToString("dd/MM/yyyy HH:mm")<br />
+                <strong>Método de Pago:</strong> @comprobante.MetodoPago
+            </div>
+        </div>
+
+        <table id="tablaComprobante" class="table table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>Producto</th>
+                    <th>IMEI / Serial</th>
+                    <th>Precio Unit.</th>
+                    <th>Garantía</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in comprobante.Detalles)
+                {
+                    <tr>
+                        <td>@item.ProductoNombre</td>
+                        <td>
+                            @foreach (var serial in item.Seriales)
+                            {
+                                <div>@serial</div>
+                            }
+                        </td>
+                        <td>@item.PrecioUnitario.ToString("C")</td>
+                        <td class="text-success fw-bold">@item.GarantiaMeses</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2" class="text-end fw-bold">TOTAL:</td>
+                    <td colspan="2" class="fw-bold">@comprobante.Total.ToString("C")</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="mt-5 text-muted text-center" style="font-size: 0.8rem;">
+            <p>Gracias por su compra. Conserve este documento para hacer válida su garantía.<br/>
+            Los dispositivos cuentan con @comprobante.Detalles.FirstOrDefault()?.GarantiaMeses de garantía a partir de la fecha de compra.</p>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public int idVenta { get; set; }
+    private VentaResponse? comprobante;
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Llamamos al endpoint que creamos en la Parte 1
+            comprobante = await Http.GetFromJsonAsync<VentaResponse>($"api/Venta/{idVenta}");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al cargar el comprobante: {ex.Message}";
+        }
+    }
+
+    private async Task DescargarPDF()
+    {
+        // Llamamos a la función JS que creamos
+        await JS.InvokeVoidAsync("exportarPDF", "comprobanteArea", $"Factura_{comprobante?.IdVenta}");
+    }
+
+    private async Task DescargarExcel()
+    {
+        // Llamamos a la función JS para exportar la tabla
+        await JS.InvokeVoidAsync("exportarExcel", "tablaComprobante", $"Factura_{comprobante?.IdVenta}");
+    }
+    private void VolverAlPOS()
+    {
+        Navigation.NavigateTo("/ventas");
+    }
+}

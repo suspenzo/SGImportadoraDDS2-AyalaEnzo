@@ -40,6 +40,7 @@ C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Clie
 C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Client\wwwroot\css\app.css
 C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Client\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
 C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Client\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
+C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Client\wwwroot\js\exportar.js
 C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Client\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css
 C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Client\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css
 C:\Users\Dell\Documents\Desarrollo de Sistemas II\PROJECT\SGImportadora\POS.Client\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map
@@ -51,6 +52,7 @@ wwwroot\favicon.png
 wwwroot\icon-192.png
 wwwroot\icon-512.png
 wwwroot\index.html
+wwwroot\js\exportar.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
 wwwroot\lib\bootstrap\dist\css\bootstrap.min.css

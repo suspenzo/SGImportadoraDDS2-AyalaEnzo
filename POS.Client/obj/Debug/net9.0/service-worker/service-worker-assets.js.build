@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "uE7NyWP1",
+  "version": "FuSDlI67",
   "assets": [
     {
       "hash": "sha256-mRRHkKsCpZho3o2g9E5XxJjQj3O5ZXkoqMH6TRSHGOo=",
@@ -138,20 +138,20 @@ self.assetsManifest = {
       "url": "_framework/Microsoft.Win32.Registry.kxreztpsym.wasm"
     },
     {
-      "hash": "sha256-/UhZioMwr1I89YgbYKGNvQl56nYj8nBHuQM88PJZVhU=",
-      "url": "_framework/POS.Client.p181qo3mwy.wasm"
+      "hash": "sha256-FpNiZmhpbv2UEbJLMmTBQjwmKiffCwNiy3ga9FJRm8c=",
+      "url": "_framework/POS.Client.acj4qu2qkb.pdb"
     },
     {
-      "hash": "sha256-uf6KZE0u2NuHM+3n2AzE/VeI+E7EHV+CrvwjT9bP+Uo=",
-      "url": "_framework/POS.Client.zpaol4nq2c.pdb"
+      "hash": "sha256-OnfR58ZhgKJBH1xFmYgDCEqYEeu9eX3WenbbZvhAD2c=",
+      "url": "_framework/POS.Client.yuatf7ndyz.wasm"
     },
     {
-      "hash": "sha256-U9M5I6GXRiPR2Xh83RlUYHpG0Vl75nf+4QrxqSIyYx8=",
-      "url": "_framework/POS.Shared.9t1ate13x2.wasm"
+      "hash": "sha256-h/1KhTZULH6KLGsfyBvwridOl7bpAkrQRDi2lo87CxU=",
+      "url": "_framework/POS.Shared.p8ci0pnmia.pdb"
     },
     {
-      "hash": "sha256-mTpX73H8gobituES4YKk+pYNMbCyoVHKrC3KxtZ8zY0=",
-      "url": "_framework/POS.Shared.jhvoo2rkrn.pdb"
+      "hash": "sha256-gOIsopfIs9ITQMV9FK011w++imHyJOolp9DcB0+jit0=",
+      "url": "_framework/POS.Shared.w06s58hah1.wasm"
     },
     {
       "hash": "sha256-n/Oc1WzjrFIIUZ+OrdGL5V2zdlBCnx7tDallbl1OAJo=",
@@ -806,7 +806,7 @@ self.assetsManifest = {
       "url": "_framework/WindowsBase.y8ae02uxne.wasm"
     },
     {
-      "hash": "sha256-taUY4uPQeFvh8Vc2IKh8X3l66fhqmDdDkUallj3sBII=",
+      "hash": "sha256-Gs5UAGrUhT0Z/BLtiK/GNy5TSwXT8/3BOuLnTk4RLxE=",
       "url": "_framework/blazor.boot.json"
     },
     {
@@ -874,8 +874,12 @@ self.assetsManifest = {
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-QckTWD8eO4cRRV+Jk0aUQQ7DLVTKCMUXV5Xx9roW4i4=",
+      "hash": "sha256-gUqPrxXpUUrvElsAbDcItq/A3lnvoMc8eoOHLW8NJOE=",
       "url": "index.html"
+    },
+    {
+      "hash": "sha256-XQLYQFuZmXItQJF+O2zgX3dkHjEzS9rbugNlamgYPqU=",
+      "url": "js/exportar.js"
     },
     {
       "hash": "sha256-Yy5/hBqRmmU2MJ1TKwP2aXoTO6+OjzrLmJIsC2Wy4H8=",
