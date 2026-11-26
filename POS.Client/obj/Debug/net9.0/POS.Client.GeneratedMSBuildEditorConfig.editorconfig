@@ -28,12 +28,24 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Dell/Documents/Desarrollo de Sistemas II/PROJECT/SGImportadora/POS.Client/Layout/EmptyLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XEVtcHR5TGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Dell/Documents/Desarrollo de Sistemas II/PROJECT/SGImportadora/POS.Client/Pages/Clients.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Dell/Documents/Desarrollo de Sistemas II/PROJECT/SGImportadora/POS.Client/Pages/DashboardVentas.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGFzaGJvYXJkVmVudGFzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Dell/Documents/Desarrollo de Sistemas II/PROJECT/SGImportadora/POS.Client/Pages/Garantia.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR2FyYW50aWEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dell/Documents/Desarrollo de Sistemas II/PROJECT/SGImportadora/POS.Client/Pages/HistorialSesiones.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSGlzdG9yaWFsU2VzaW9uZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Dell/Documents/Desarrollo de Sistemas II/PROJECT/SGImportadora/POS.Client/Pages/Home.razor]

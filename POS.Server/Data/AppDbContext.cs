@@ -20,8 +20,9 @@ namespace POS.Server.Data
             public DbSet<Proveedor> Proveedores { get; set; }
             public DbSet<LoteImportacion> LotesImportacion { get; set; }
             public DbSet<Garantia> Garantias { get; set; }
+            public DbSet<LoginHistory> LoginHistories { get; set; }
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
                 base.OnModelCreating(modelBuilder);
 

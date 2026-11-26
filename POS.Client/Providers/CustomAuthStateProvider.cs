@@ -8,11 +8,13 @@ namespace POS.Client.Providers
     public class CustomAuthStateProvider : AuthenticationStateProvider
     {
         private readonly IJSRuntime _jsRuntime;
+        private readonly HttpClient _httpClient;
         private readonly string _tokenKey = "authToken";
 
-        public CustomAuthStateProvider(IJSRuntime jsRuntime)
+        public CustomAuthStateProvider(IJSRuntime jsRuntime, HttpClient httpClient)
         {
             _jsRuntime = jsRuntime;
+            _httpClient = httpClient;
         }
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
@@ -47,13 +49,17 @@ namespace POS.Client.Providers
         // Método para notificar a Blazor que el usuario se ha deslogueado
         public async Task MarkUserAsLoggedOut()
         {
-            // 1. Eliminamos el token del almacenamiento del navegador
+            try
+            {
+                // 👇 Avisamos al backend para que registre la hora de salida 👇
+                await _httpClient.PostAsync("api/Auth/logout", null);
+            }
+            catch { /* Ignorar errores de red al cerrar sesión */ }
+
+            // Eliminamos el token del almacenamiento del navegador
             await _jsRuntime.InvokeVoidAsync("localStorage.removeItem", _tokenKey);
 
-            // 2. Creamos un usuario "anónimo" (sin claims)
             var anonymousUser = new ClaimsPrincipal(new ClaimsIdentity());
-
-            // 3. Notificamos a Blazor que el estado cambió (esto dispara la redirección al login automáticamente por el AuthorizeRouteView)
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(anonymousUser)));
         }
     }

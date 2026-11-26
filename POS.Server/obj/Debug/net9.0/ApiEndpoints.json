@@ -48,6 +48,26 @@
   },
   {
     "ContainingType": "POS.Server.Controllers.AuthController",
+    "Method": "GetHistorial",
+    "RelativePath": "api/Auth/historial",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[POS.Shared.DTOs.LoginHistoryDto, POS.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "POS.Server.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "api/Auth/Login",
     "HttpMethod": "POST",
@@ -71,6 +91,16 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "POS.Server.Controllers.AuthController",
+    "Method": "Logout",
+    "RelativePath": "api/Auth/logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "POS.Server.Controllers.AuthController",
@@ -751,6 +781,26 @@
     "ReturnTypes": [
       {
         "Type": "POS.Shared.DTOs.VentaResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "POS.Server.Controllers.VentaController",
+    "Method": "GetDashboard",
+    "RelativePath": "api/Venta/dashboard",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[POS.Shared.DTOs.VentaDashboardDto, POS.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

@@ -1,4 +1,6 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using POS.Server.Data;
 using POS.Server.Repositories;
 using POS.Shared.DTOs;
 using POS.Shared.Entities;
@@ -14,11 +16,13 @@ namespace POS.Server.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IConfiguration _configuration;
+        private readonly AppDbContext _context;
 
-        public AuthService(IUserRepository userRepository, IConfiguration configuration)
+        public AuthService(IUserRepository userRepository, IConfiguration configuration, AppDbContext context)
         {
             _userRepository = userRepository;
             _configuration = configuration;
+            _context = context;
         }
 
         public async Task<AuthResponse?> RegisterAsync(RegisterRequest request)
@@ -50,6 +54,14 @@ namespace POS.Server.Services
             if (!BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
                 return null;
 
+            var historial = new LoginHistory
+            {
+                UserId = user.Id,
+                LoginTime = DateTime.Now
+            };
+            _context.LoginHistories.Add(historial);
+            await _context.SaveChangesAsync();
+            
             return GenerateAuthResponse(user);
         }
 
@@ -150,6 +162,37 @@ namespace POS.Server.Services
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public async Task LogoutAsync(int userId)
+        {
+            // Buscamos la sesión activa (sin hora de salida)
+            var sesionActiva = await _context.LoginHistories
+                .Where(h => h.UserId == userId && h.LogoutTime == null)
+                .OrderByDescending(h => h.LoginTime)
+                .FirstOrDefaultAsync();
+
+            if (sesionActiva != null)
+            {
+                sesionActiva.LogoutTime = DateTime.Now;
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<List<LoginHistoryDto>> GetLoginHistoryAsync()
+        {
+            return await _context.LoginHistories
+                .Include(h => h.User)
+                .OrderByDescending(h => h.LoginTime)
+                .Select(h => new LoginHistoryDto
+                {
+                    Id = h.Id,
+                    NombreUsuario = h.User != null ? h.User.Name : "Desconocido",
+                    Email = h.User != null ? h.User.Email : "N/A",
+                    FechaEntrada = h.LoginTime,
+                    FechaSalida = h.LogoutTime
+                })
+                .ToListAsync();
         }
     }
 }

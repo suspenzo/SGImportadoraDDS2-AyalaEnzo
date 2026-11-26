@@ -1,6 +1,7 @@
 ﻿using POS.Shared.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,10 @@ namespace POS.Shared.Entities
         public MetodoPago MetodoPago { get; set; }
 
         // Propiedades de navegación (Para Entity Framework)
+        [ForeignKey("IdCliente")]
         public Client? Cliente { get; set; }
+
+        [ForeignKey("IdUsuario")] 
         public User? Usuario { get; set; }
         public ICollection<DetalleVenta> Detalles { get; set; } = new List<DetalleVenta>();
     }

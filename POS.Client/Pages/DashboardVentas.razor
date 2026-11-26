@@ -1,0 +1,233 @@
+﻿@page "/dashboard-ventas"
+@attribute [Authorize(Roles = "Administrador,Vendedor")]
+@using POS.Shared.DTOs
+@using ApexCharts
+@inject HttpClient Http
+
+<h3 class="mb-4">Dashboard de Ventas y Garantías</h3>
+
+@if (errorMessage != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @errorMessage
+        <button type="button" class="btn-close" @onclick="() => errorMessage = null"></button>
+    </div>
+}
+
+<!-- SECCIÓN DEL GRÁFICO -->
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+        <span><i class="oi oi-bar-chart"></i> Top Productos Más Vendidos</span>
+        <div class="d-flex align-items-center gap-2">
+            <label class="mb-0 text-nowrap">Desde:</label>
+            <input type="date" class="form-control form-control-sm" @bind="fechaInicio" />
+
+            <label class="mb-0 text-nowrap ms-2">Hasta:</label>
+            <input type="date" class="form-control form-control-sm" @bind="fechaFin" />
+
+            <button class="btn btn-primary btn-sm ms-2" @onclick="UpdateChartData">
+                <span class="oi oi-reload"></span> Actualizar
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        @if (datosGrafico == null || datosGrafico.Count == 0)
+        {
+            <p class="text-muted text-center my-4">No hay ventas registradas en este período.</p>
+        }
+        else
+        {
+            <ApexChart @key="chartKey" TItem="ProductoVendido" Title="Top 5 Productos Vendidos" Height="350">
+                <ApexPointSeries TItem="ProductoVendido"
+                                 Items="datosGrafico"
+                                 Name="Unidades Vendidas"
+                                 SeriesType="SeriesType.Bar"
+                                 XValue="e => e.Nombre"
+                                 YValue="e => e.Cantidad" />
+            </ApexChart>
+        }
+    </div>
+</div>
+
+<!-- TABLA DE HISTORIAL CON ORDENAMIENTO -->
+<div class="card shadow-sm">
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead class="table-dark" style="cursor: pointer;">
+                <tr>
+                    <th @onclick="SortByFecha">Fecha Venta <span class="oi @GetSortIcon("Fecha")"></span></th>
+                    <th @onclick="SortByVendedor">Vendedor <span class="oi @GetSortIcon("Vendedor")"></span></th>
+                    <th @onclick="SortByCliente">Cliente <span class="oi @GetSortIcon("Cliente")"></span></th>
+                    <th @onclick="SortByProducto">Producto <span class="oi @GetSortIcon("Producto")"></span></th>
+                    <th @onclick="SortByCategoria">Categoría <span class="oi @GetSortIcon("Categoria")"></span></th>
+                    <th @onclick="SortByImei">IMEI / Serial <span class="oi @GetSortIcon("ImeiSerial")"></span></th>
+                    <th @onclick="SortByGarantia">Garantía Restante <span class="oi @GetSortIcon("TiempoGarantiaRestante")"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ventas == null)
+                {
+                    <tr><td colspan="7" class="text-center py-3">Cargando ventas...</td></tr>
+                }
+                else if (!ventas.Any())
+                {
+                    <tr><td colspan="7" class="text-center py-3">No hay ventas registradas aún.</td></tr>
+                }
+                else
+                {
+                    @foreach (var v in SortedVentas)
+                    {
+                        <tr>
+                            <td>@v.FechaVenta.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td><span class="badge bg-secondary">@v.Vendedor</span></td>
+                            <td>@v.Cliente</td>
+                            <td><strong>@v.Producto</strong></td>
+                            <td>@v.Categoria</td>
+                            <td><code>@v.ImeiSerial</code></td>
+                            <td>
+                                @if (v.GarantiaVigente)
+                                {
+                                    <span class="badge bg-success">@v.TiempoGarantiaRestante</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Vencida</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer text-end text-muted">
+        Total de equipos vendidos: <strong>@(ventas?.Count ?? 0)</strong>
+    </div>
+</div>
+
+@code {
+    private List<VentaDashboardDto>? ventas;
+    private string? errorMessage;
+
+    // --- Variables para Ordenamiento ---
+    private string sortColumn = "Fecha";
+    private bool sortAscending = false; // Por defecto descendente
+
+    // --- Variables para el Gráfico ---
+   // private string rangoTiempo = "Todo";
+    // --- Variables para el Gráfico y Filtro por Fechas ---
+    private DateTime fechaInicio = DateTime.Today.AddMonths(-1); // Por defecto muestra el último mes
+    private DateTime fechaFin = DateTime.Today; // Por defecto hasta hoy
+    private List<ProductoVendido> datosGrafico = new();
+    private int chartKey = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            ventas = await Http.GetFromJsonAsync<List<VentaDashboardDto>>("api/Venta/dashboard");
+            UpdateChartData();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al cargar el dashboard: {ex.Message}";
+        }
+    }
+
+    // ==========================================
+    // LÓGICA DE ORDENAMIENTO
+    // ==========================================
+    private IEnumerable<VentaDashboardDto> SortedVentas
+    {
+        get
+        {
+            if (ventas == null) return Enumerable.Empty<VentaDashboardDto>();
+
+            var sorted = sortColumn switch
+            {
+                "Fecha" => ventas.OrderBy(v => v.FechaVenta),
+                "Vendedor" => ventas.OrderBy(v => v.Vendedor),
+                "Cliente" => ventas.OrderBy(v => v.Cliente),
+                "Producto" => ventas.OrderBy(v => v.Producto),
+                "Categoria" => ventas.OrderBy(v => v.Categoria),
+                "ImeiSerial" => ventas.OrderBy(v => v.ImeiSerial),
+                // Para la garantía, ordena primero los vigentes y luego por el texto
+                "TiempoGarantiaRestante" => ventas.OrderBy(v => v.GarantiaVigente).ThenBy(v => v.TiempoGarantiaRestante),
+                _ => ventas.OrderBy(v => v.FechaVenta)
+            };
+
+            return sortAscending ? sorted : sorted.Reverse();
+        }
+    }
+
+    private void SortBy(string column)
+    {
+        if (sortColumn == column)
+        {
+            sortAscending = !sortAscending; // Cambiar dirección si es la misma columna
+        }
+        else
+        {
+            sortColumn = column;
+            sortAscending = true; // Nueva columna siempre inicia ascendente
+        }
+    }
+
+    private string GetSortIcon(string column)
+    {
+        if (sortColumn != column) return ""; // Sin ícono si no está ordenado por esta columna
+        return sortAscending ? "oi-caret-top" : "oi-caret-bottom";
+    }
+
+    // ==========================================
+    // LÓGICA DEL GRÁFICO
+    // ==========================================
+    private void UpdateChartData()
+    {
+        if (ventas == null) return;
+
+        if (fechaInicio > fechaFin)
+        {
+            datosGrafico.Clear();
+            chartKey++; // Forzamos refresco
+            StateHasChanged();
+            return;
+        }
+
+        DateTime inicio = fechaInicio.Date;
+        DateTime fin = fechaFin.Date.AddDays(1).AddTicks(-1);
+
+        var filtradas = ventas.Where(v => v.FechaVenta >= inicio && v.FechaVenta <= fin);
+
+        datosGrafico = filtradas
+            .GroupBy(v => v.Producto)
+            .Select(g => new ProductoVendido
+            {
+                Nombre = g.Key,
+                Cantidad = g.Count()
+            })
+            .OrderByDescending(x => x.Cantidad)
+            .Take(5)
+            .ToList();
+
+        // 👇 2. Incrementamos la Key para que ApexChart se redibuje por completo
+        chartKey++;
+        StateHasChanged();
+    }
+
+
+    // Clase auxiliar para el gráfico
+    public class ProductoVendido
+    {
+        public string Nombre { get; set; } = string.Empty;
+        public int Cantidad { get; set; }
+    }
+
+    private void SortByFecha() => SortBy("Fecha");
+    private void SortByVendedor() => SortBy("Vendedor");
+    private void SortByCliente() => SortBy("Cliente");
+    private void SortByProducto() => SortBy("Producto");
+    private void SortByCategoria() => SortBy("Categoria");
+    private void SortByImei() => SortBy("ImeiSerial");
+    private void SortByGarantia() => SortBy("TiempoGarantiaRestante");
+}

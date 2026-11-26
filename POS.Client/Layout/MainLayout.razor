@@ -1,16 +1,527 @@
 ﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+@implements IDisposable
+@inject NavigationManager NavManager
+@inject AuthenticationStateProvider AuthStateProvider
+@using POS.Client.Providers
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+<div class="app-background">
+    <!-- BARRA SUPERIOR -->
+    <header class="top-bar @(!isHomePage ? "expanded" : "")">
+        <div class="logo-text">SG Importadora</div>
+        
+        <!-- MENÚ SUPERIOR (Solo visible cuando NO estamos en el Home) -->
+        @if (!isHomePage)
+        {
+            <div class="top-nav-links">
+                <NavLink class="top-nav-item" href="" Match="NavLinkMatch.All">Inicio</NavLink>
+                <NavLink class="top-nav-item" href="products">Productos</NavLink>
+                <NavLink class="top-nav-item" href="ventas">Ventas</NavLink>
+                <NavLink class="top-nav-item" href="clients">Cientes</NavLink>
+                <AuthorizeView Roles="Administrador,Bodeguero">
+                    <Authorized>
+                        <NavLink class="top-nav-item" href="inventario">Inventario</NavLink>
+                    </Authorized>
+                </AuthorizeView>
+                <AuthorizeView Roles="Administrador">
+                    <Authorized>
+                        <NavLink class="top-nav-item" href="users">Usuarios</NavLink>
+                    </Authorized>
+                </AuthorizeView>
+
+                <!-- DROPDOWN REPORTES (SUPERIOR) -->
+                <AuthorizeView Roles="Administrador,Vendedor">
+                    <Authorized>
+                        <div class="dropdown" @onclick="ToggleTopDropdown">
+                            <span class="top-nav-item dropdown-trigger">
+                                Reportes <i class="oi oi-caret-bottom" style="font-size: 10px; margin-left: 3px;"></i>
+                            </span>
+
+                            @if (isTopDropdownOpen)
+                            {
+                                <div class="dropdown-menu top-dropdown" @onclick:stopPropagation="true">
+                                    <NavLink class="dropdown-item" href="dashboard-ventas" @onclick="CloseDropdowns">Ventas</NavLink>
+                                    @if (context.User.IsInRole("Administrador"))
+                                    {
+                                        <NavLink class="dropdown-item" href="historial-sesiones" @onclick="CloseDropdowns">Sesiones</NavLink>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </Authorized>
+                </AuthorizeView>
+            </div>
+        }
+
+        <!-- ACCIONES DE USUARIO -->
+        <div class="top-actions">
+            <AuthorizeView>
+                <Authorized>
+                    <span class="user-name-top">@context.User.Identity?.Name</span>
+                    <button class="icon-btn logout-btn" @onclick="Logout" title="Cerrar Sesión">
+                        <i class="oi oi-account-logout"></i> Salir
+                    </button>
+                </Authorized>
+            </AuthorizeView>
         </div>
+    </header>
 
-        <article class="content px-4">
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content @(isHomePage ? "has-bottom-nav" : "")">
+        @if (isHomePage)
+        {
+            <div class="welcome-container">
+                <AuthorizeView>
+                    <Authorized>
+                        <h1 class="welcome-title">Bienvenido, <span class="highlight">@context.User.Identity?.Name</span></h1>
+                    </Authorized>
+                </AuthorizeView>
+            </div>
+        }
+
+        <div class="page-body">
             @Body
-        </article>
+        </div>
     </main>
+
+    <!-- MENÚ FLOTANTE INFERIOR (Solo visible en el Home) -->
+    @if (isHomePage)
+    {
+        <nav class="floating-nav-wrapper">
+            <div class="floating-nav">
+                <NavLink class="nav-pill-item" href="" Match="NavLinkMatch.All">
+                    <i class="oi oi-home"></i>
+                    <span>Inicio</span>
+                </NavLink>
+                <NavLink class="nav-pill-item" href="products">
+                    <i class="oi oi-box"></i>
+                    <span>Productos</span>
+                </NavLink>
+                <NavLink class="nav-pill-item" href="ventas">
+                    <i class="oi oi-cart"></i>
+                    <span>Ventas</span>
+                </NavLink>
+                <NavLink class="nav-pill-item" href="clients">
+                    <i class="oi oi-cart"></i>
+                    <span>Clientes</span>
+                </NavLink>
+                <AuthorizeView Roles="Administrador,Bodeguero">
+                    <Authorized>
+                        <NavLink class="nav-pill-item" href="inventario">
+                            <i class="oi oi-layers"></i>
+                            <span>Inventario</span>
+                        </NavLink>
+                    </Authorized>
+                </AuthorizeView>
+                <AuthorizeView Roles="Administrador">
+                    <Authorized>
+                        <NavLink class="nav-pill-item" href="users">
+                            <i class="oi oi-people"></i>
+                            <span>Usuarios</span>
+                        </NavLink>
+                    </Authorized>
+                </AuthorizeView>
+
+                <!-- DROPDOWN REPORTES (INFERIOR) -->
+                <AuthorizeView Roles="Administrador,Vendedor">
+                    <Authorized>
+                        <div class="nav-pill-item dropdown" @onclick="ToggleBottomDropdown">
+                            <div class="dropdown-trigger" style="display: flex; flex-direction: column; align-items: center; cursor: pointer;">
+                                <i class="oi oi-graph"></i>
+                                <span>Reportes <i class="oi oi-caret-top" style="font-size: 10px;"></i></span>
+                            </div>
+
+                            @if (isBottomDropdownOpen)
+                            {
+                                <div class="dropdown-menu bottom-dropdown" @onclick:stopPropagation="true">
+                                    <NavLink class="dropdown-item" href="dashboard-ventas" @onclick="CloseDropdowns">Ventas</NavLink>
+                                    @if (context.User.IsInRole("Administrador"))
+                                    {
+                                        <NavLink class="dropdown-item" href="historial-sesiones" @onclick="CloseDropdowns">Sesiones</NavLink>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </Authorized>
+                </AuthorizeView>
+            </div>
+        </nav>
+    }
 </div>
+
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', sans-serif;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .app-background {
+        background-color: #0f2229;
+        background-image: radial-gradient(at 10% 10%, rgba(62, 123, 140, 0.4) 0px, transparent 50%), radial-gradient(at 90% 90%, rgba(19, 28, 33, 0.8) 0px, transparent 50%), radial-gradient(at 50% 50%, rgba(28, 59, 70, 0.6) 0px, transparent 50%);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        color: #ffffff;
+        overflow-y: auto;
+    }
+
+    /* --- BARRA SUPERIOR --- */
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 40px;
+        background: transparent;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 10;
+    }
+
+        .top-bar.expanded {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+    .logo-text {
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: #ffffff;
+        width: 200px;
+    }
+
+    .top-nav-links {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+    }
+
+    .top-nav-item {
+        color: #aab0b5;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: color 0.3s;
+        position: relative;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+        .top-nav-item:hover, .top-nav-item.active {
+            color: #ffffff;
+        }
+
+            .top-nav-item.active::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background-color: #6ab0c4;
+                border-radius: 2px;
+            }
+
+    .top-actions {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        width: 200px;
+        justify-content: flex-end;
+    }
+
+    .user-name-top {
+        font-size: 13px;
+        color: #aab0b5;
+        margin-right: 5px;
+    }
+
+    .icon-btn {
+        color: #aab0b5;
+        font-size: 14px;
+        text-decoration: none;
+        transition: color 0.3s;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+        .icon-btn:hover {
+            color: #ffffff;
+        }
+
+    .logout-btn:hover {
+        color: #ff6b6b;
+    }
+
+    /* --- ESTILOS PARA EL DROPDOWN --- */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-menu {
+        animation: fadeIn 0.15s ease-in-out;
+    }
+
+    /* Dropdown en la barra superior (hacia abajo) */
+    .top-dropdown {
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 10px;
+        background: rgba(19, 28, 33, 0.98);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+    }
+
+        /* 👇 EL PUENTE INVISIBLE (SUPERIOR) 👇 */
+        .top-dropdown::before {
+            content: '';
+            position: absolute;
+            top: -15px; /* Cubre el espacio del margen */
+            left: 0;
+            width: 100%;
+            height: 15px;
+        }
+
+    /* Dropdown en la barra inferior (hacia arriba) */
+    .bottom-dropdown {
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 15px;
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+    }
+
+        /* 👇 EL PUENTE INVISIBLE (INFERIOR) 👇 */
+        .bottom-dropdown::before {
+            content: '';
+            position: absolute;
+            bottom: -20px; /* Cubre el espacio del margen */
+            left: 0;
+            width: 100%;
+            height: 20px;
+        }
+
+    /* Mostrar el menú al pasar el mouse */
+    .dropdown:hover .dropdown-menu {
+        display: block;
+        animation: fadeIn 0.15s ease-in-out;
+    }
+
+    /* 👇 ANIMACIÓN CORREGIDA: Ya no se mueve de lugar 👇 */
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translate(-50%, 5px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+    }
+
+    /* Estilos de los ítems del dropdown */
+    .dropdown-item {
+        display: block;
+        padding: 12px 15px;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+
+    /* Items en el menú superior */
+    .top-dropdown .dropdown-item {
+        color: #aab0b5;
+    }
+
+        .top-dropdown .dropdown-item:hover {
+            background: rgba(255,255,255,0.1);
+            color: #ffffff;
+        }
+
+    /* Items en el menú inferior */
+    .bottom-dropdown .dropdown-item {
+        color: #131c21;
+    }
+
+        .bottom-dropdown .dropdown-item:hover {
+            background: #f0f4f8;
+            color: #3e7b8c;
+        }
+
+    /* Redondear los bordes del primer y último item */
+    .dropdown-item:first-child {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .dropdown-item:last-child {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+
+
+    /* --- CONTENIDO PRINCIPAL --- */
+    .main-content {
+        flex: 1;
+        padding: 40px;
+        overflow-y: auto;
+    }
+
+        .main-content.has-bottom-nav {
+            padding-bottom: 120px;
+        }
+
+    .welcome-container {
+        text-align: center;
+        margin-bottom: 40px;
+        margin-top: 20px;
+    }
+
+    .welcome-title {
+        font-size: 32px;
+        font-weight: 300;
+        margin: 0;
+    }
+
+        .welcome-title .highlight {
+            font-weight: 600;
+            color: #6ab0c4;
+            text-shadow: 0 0 15px rgba(106, 176, 196, 0.4);
+        }
+
+    .page-body {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 30px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    /* --- MENÚ FLOTANTE INFERIOR --- */
+    .floating-nav-wrapper {
+        position: fixed;
+        bottom: 30px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        pointer-events: none;
+        z-index: 1000;
+    }
+
+    .floating-nav {
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        border-radius: 50px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        pointer-events: auto;
+        gap: 10px;
+    }
+
+    .nav-pill-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #7a858c;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 10px 20px;
+        border-radius: 40px;
+        transition: all 0.3s ease;
+        min-width: 80px;
+    }
+
+        .nav-pill-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .nav-pill-item.active {
+            background-color: #131c21;
+            color: #ffffff;
+            box-shadow: 0 5px 15px rgba(19, 28, 33, 0.2);
+        }
+
+        .nav-pill-item:hover:not(.active) {
+            background-color: #f0f4f8;
+            color: #3e7b8c;
+        }
+</style>
+
+@code {
+    private bool isHomePage = true;
+    private bool isTopDropdownOpen = false;
+    private bool isBottomDropdownOpen = false;
+
+    protected override void OnInitialized()
+    {
+        NavManager.LocationChanged += HandleLocationChanged;
+        UpdatePageState(NavManager.Uri);
+    }
+
+    private void HandleLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
+    {
+        UpdatePageState(e.Location);
+    }
+
+    private void UpdatePageState(string uri)
+    {
+        var relativePath = NavManager.ToBaseRelativePath(uri);
+        isHomePage = string.IsNullOrEmpty(relativePath) || relativePath == "/";
+        StateHasChanged();
+    }
+
+    private async Task Logout()
+    {
+        var customAuthProvider = (CustomAuthStateProvider)AuthStateProvider;
+        await customAuthProvider.MarkUserAsLoggedOut();
+        NavManager.NavigateTo("/login");
+    }
+
+    public void Dispose()
+    {
+        NavManager.LocationChanged -= HandleLocationChanged;
+    }
+    private void ToggleTopDropdown()
+    {
+        isTopDropdownOpen = !isTopDropdownOpen;
+        isBottomDropdownOpen = false; // Cierra el otro por si acaso
+    }
+
+    private void ToggleBottomDropdown()
+    {
+        isBottomDropdownOpen = !isBottomDropdownOpen;
+        isTopDropdownOpen = false;
+    }
+
+    private void CloseDropdowns()
+    {
+        isTopDropdownOpen = false;
+        isBottomDropdownOpen = false;
+    }
+}

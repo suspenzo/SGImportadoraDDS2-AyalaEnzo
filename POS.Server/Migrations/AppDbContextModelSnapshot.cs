@@ -103,15 +103,12 @@ namespace POS.Server.Migrations
                     b.Property<decimal>("PrecioUnitario")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ProductoProductID")
-                        .HasColumnType("int");
-
                     b.Property<int?>("VentaId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductoProductID");
+                    b.HasIndex("IdProducto");
 
                     b.HasIndex("VentaId");
 
@@ -144,6 +141,30 @@ namespace POS.Server.Migrations
                         .IsUnique();
 
                     b.ToTable("Garantias");
+                });
+
+            modelBuilder.Entity("POS.Shared.Entities.LoginHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("LoginTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LogoutTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("LoginHistories");
                 });
 
             modelBuilder.Entity("POS.Shared.Entities.LoteImportacion", b =>
@@ -302,16 +323,13 @@ namespace POS.Server.Migrations
                     b.Property<int?>("LoteId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductoProductID")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DetalleVentaId");
 
-                    b.HasIndex("LoteId");
+                    b.HasIndex("IdProducto");
 
-                    b.HasIndex("ProductoProductID");
+                    b.HasIndex("LoteId");
 
                     b.ToTable("UnidadesFisicas");
                 });
@@ -358,9 +376,6 @@ namespace POS.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ClienteId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
@@ -376,14 +391,11 @@ namespace POS.Server.Migrations
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("UsuarioId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ClienteId");
+                    b.HasIndex("IdCliente");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("IdUsuario");
 
                     b.ToTable("Ventas");
                 });
@@ -392,7 +404,9 @@ namespace POS.Server.Migrations
                 {
                     b.HasOne("POS.Shared.Entities.Product", "Producto")
                         .WithMany()
-                        .HasForeignKey("ProductoProductID");
+                        .HasForeignKey("IdProducto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("POS.Shared.Entities.Venta", "Venta")
                         .WithMany("Detalles")
@@ -412,6 +426,17 @@ namespace POS.Server.Migrations
                         .IsRequired();
 
                     b.Navigation("UnidadFisica");
+                });
+
+            modelBuilder.Entity("POS.Shared.Entities.LoginHistory", b =>
+                {
+                    b.HasOne("POS.Shared.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("POS.Shared.Entities.LoteImportacion", b =>
@@ -448,13 +473,15 @@ namespace POS.Server.Migrations
                         .WithMany("UnidadesFisicas")
                         .HasForeignKey("DetalleVentaId");
 
+                    b.HasOne("POS.Shared.Entities.Product", "Producto")
+                        .WithMany()
+                        .HasForeignKey("IdProducto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("POS.Shared.Entities.LoteImportacion", "Lote")
                         .WithMany("Unidades")
                         .HasForeignKey("LoteId");
-
-                    b.HasOne("POS.Shared.Entities.Product", "Producto")
-                        .WithMany()
-                        .HasForeignKey("ProductoProductID");
 
                     b.Navigation("DetalleVenta");
 
@@ -467,11 +494,15 @@ namespace POS.Server.Migrations
                 {
                     b.HasOne("POS.Shared.Entities.Client", "Cliente")
                         .WithMany()
-                        .HasForeignKey("ClienteId");
+                        .HasForeignKey("IdCliente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("POS.Shared.Entities.User", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("IdUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Cliente");
 

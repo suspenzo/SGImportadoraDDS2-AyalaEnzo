@@ -12,27 +12,41 @@
     <div class="alert alert-danger">@errorMessage</div>
 }
 
-<button class="btn btn-primary mb-3" @onclick="ShowCreateForm">Nuevo Producto</button>
+<div class="d-flex gap-2 mb-3">
+    <button class="btn btn-primary" @onclick="ShowCreateForm">
+        <i class="bi bi-plus-circle"></i> Nuevo Producto
+    </button>
+
+    <button class="btn btn-success" @onclick="ShowMarcaForm">
+        <i class="bi bi-tag"></i> Añadir Marca
+    </button>
+</div>
 
 @if (showForm)
 {
     <div class="card mb-3">
         <div class="card-body">
-            <h5 class="card-title">@(isEditing ? "Editar Producto" : "Nuevo Producto")</h5>
+            <h5 class="card-title">
+                @(isEditing ? "Editar Producto" : "Nuevo Producto")
+            </h5>
+
             <EditForm Model="currentProduct" OnValidSubmit="SaveProduct">
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label>SKU</label>
                         <InputText @bind-Value="currentProduct.Sku" class="form-control" />
                     </div>
+
                     <div class="col-md-4 mb-3">
                         <label>Nombre</label>
                         <InputText @bind-Value="currentProduct.Nombre" class="form-control" />
                     </div>
+
                     <div class="col-md-4 mb-3">
                         <label>Precio Venta</label>
                         <InputNumber @bind-Value="currentProduct.PrecioVenta" class="form-control" />
                     </div>
+
                     <div class="col-md-4 mb-3">
                         <label>Categoría</label>
                         <InputSelect @bind-Value="currentProduct.CategoryID" class="form-control">
@@ -43,6 +57,7 @@
                             }
                         </InputSelect>
                     </div>
+
                     <div class="col-md-4 mb-3">
                         <label>Marca</label>
                         <InputSelect @bind-Value="currentProduct.MarcaID" class="form-control">
@@ -53,6 +68,7 @@
                             }
                         </InputSelect>
                     </div>
+
                     <div class="col-md-4 mb-3">
                         <label>Modelo</label>
                         <InputText @bind-Value="currentProduct.Modelo" class="form-control" />
@@ -66,53 +82,351 @@
     </div>
 }
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>SKU</th>
-            <th>Nombre</th>
-            <th>Categoría</th>
-            <th>Marca</th>
-            <th>Precio</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (products == null)
-        {
-            <tr><td colspan="7">Cargando productos...</td></tr>
-        }
-        else
-        {
-            @foreach (var prod in products)
-            {
+@if (showMarcaFormVisible)
+{
+    <div class="card mb-3">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Registrar nueva marca</h5>
+        </div>
+
+        <div class="card-body">
+            <EditForm Model="currentMarca" OnValidSubmit="SaveMarca">
+                <DataAnnotationsValidator />
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label>Nombre de la marca</label>
+                        <InputText @bind-Value="currentMarca.Nombre"
+                                   class="form-control" />
+
+                        <ValidationMessage For="@(() => currentMarca.Nombre)" />
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label>País de origen</label>
+                        <InputText @bind-Value="currentMarca.PaisOrigen"
+                                   class="form-control" />
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    Guardar Marca
+                </button>
+
+                <button type="button"
+                        class="btn btn-secondary"
+                        @onclick="CancelMarcaForm">
+                    Cancelar
+                </button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+@* PANEL DE FILTROS *@
+
+<div class="card mb-3">
+    <div class="card-header">
+        <strong>Filtrar productos</strong>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+
+            <div class="col-md-3 mb-3">
+                <label>Nombre</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Buscar por nombre..."
+                       @bind="filtroNombre"
+                       @bind:event="oninput" />
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <label>Categoría</label>
+                <select class="form-select" @bind="filtroCategoria">
+                    <option value="0">Todas las categorías</option>
+                    @foreach (var cat in categories)
+                    {
+                        <option value="@cat.CategoryID">@cat.Nombre</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <label>Marca</label>
+                <select class="form-select" @bind="filtroMarca">
+                    <option value="0">Todas las marcas</option>
+                    @foreach (var marca in marcas)
+                    {
+                        <option value="@marca.MarcaID">@marca.Nombre</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <label>Precio mínimo</label>
+                <InputNumber @bind-Value="precioMinimo" class="form-control" />
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <label>Precio máximo</label>
+                <InputNumber @bind-Value="precioMaximo" class="form-control" />
+            </div>
+
+            <div class="col-md-3 mb-3 d-flex align-items-end">
+                <button class="btn btn-outline-secondary w-100"
+                        @onclick="LimpiarFiltros">
+                    Limpiar filtros
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@* TABLA DE PRODUCTOS *@
+
+@if (products == null)
+{
+    <p>Cargando productos...</p>
+}
+else
+{
+    <p class="text-muted">
+        Mostrando @ProductosFiltrados.Count de @products.Count productos.
+    </p>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
                 <tr>
-                    <td>@prod.ProductID</td>
-                    <td>@prod.Sku</td>
-                    <td>@prod.Nombre</td>
-                    <td>@prod.NombreCategoria</td>
-                    <td>@prod.NombreMarca</td>
-                    <td>@prod.PrecioVenta.ToString("C")</td>
-                    <td>
-                        <button class="btn btn-sm btn-warning" @onclick="() => EditProduct(prod)">Editar</button>
-                        <button class="btn btn-sm btn-danger" @onclick="() => DeleteProduct(prod.ProductID)">Eliminar</button>
-                    </td>
+                    <th>
+                        <button class="btn btn-link text-white text-decoration-none p-0"
+                                @onclick='() => OrdenarPor("ProductID")'>
+                            ID @IconoOrden("ProductID")
+                        </button>
+                    </th>
+
+                    <th>
+                        <button class="btn btn-link text-white text-decoration-none p-0"
+                                @onclick='() => OrdenarPor("Sku")'>
+                            SKU @IconoOrden("Sku")
+                        </button>
+                    </th>
+
+                    <th>
+                        <button class="btn btn-link text-white text-decoration-none p-0"
+                                @onclick='() => OrdenarPor("Nombre")'>
+                            Nombre @IconoOrden("Nombre")
+                        </button>
+                    </th>
+
+                    <th>
+                        <button class="btn btn-link text-white text-decoration-none p-0"
+                                @onclick='() => OrdenarPor("NombreCategoria")'>
+                            Categoría @IconoOrden("NombreCategoria")
+                        </button>
+                    </th>
+
+                    <th>
+                        <button class="btn btn-link text-white text-decoration-none p-0"
+                                @onclick='() => OrdenarPor("NombreMarca")'>
+                            Marca @IconoOrden("NombreMarca")
+                        </button>
+                    </th>
+
+                    <th>
+                        <button class="btn btn-link text-white text-decoration-none p-0"
+                                @onclick='() => OrdenarPor("PrecioVenta")'>
+                            Precio @IconoOrden("PrecioVenta")
+                        </button>
+                    </th>
+
+                    <th>Acciones</th>
                 </tr>
-            }
-        }
-    </tbody>
-</table>
+            </thead>
+
+            <tbody>
+                @if (!ProductosFiltrados.Any())
+                {
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            No se encontraron productos.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var prod in ProductosFiltrados)
+                    {
+                        <tr>
+                            <td>@prod.ProductID</td>
+                            <td>@prod.Sku</td>
+                            <td>@prod.Nombre</td>
+                            <td>@prod.NombreCategoria</td>
+                            <td>@prod.NombreMarca</td>
+                            <td>@prod.PrecioVenta.ToString("C")</td>
+
+                            <td>
+                                <button class="btn btn-sm btn-warning"
+                                        @onclick="() => EditProduct(prod)">
+                                    Editar
+                                </button>
+
+                                <button class="btn btn-sm btn-danger"
+                                        @onclick="() => DeleteProduct(prod.ProductID)">
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+}
 
 @code {
     private List<ProductResponse>? products;
     private List<CategoryResponse> categories = new();
     private List<MarcaResponse> marcas = new();
+    // FORMULARIO DE MARCAS
+    private MarcaRequest currentMarca = new();
+    private bool showMarcaFormVisible = false;
 
     private ProductRequest currentProduct = new();
+
     private bool showForm = false;
     private bool isEditing = false;
     private string? errorMessage;
+    private int editingProductId;
+
+    // FILTROS
+    private string filtroNombre = "";
+    private int filtroCategoria = 0;
+    private int filtroMarca = 0;
+
+    private decimal? precioMinimo;
+    private decimal? precioMaximo;
+
+    // ORDENAMIENTO
+    private string columnaOrden = "ProductID";
+    private bool ordenAscendente = true;
+
+    // LISTA FILTRADA Y ORDENADA
+    private List<ProductResponse> ProductosFiltrados
+    {
+        get
+        {
+            if (products == null)
+                return new();
+
+            IEnumerable<ProductResponse> resultado = products;
+
+            // Filtro por nombre
+            if (!string.IsNullOrWhiteSpace(filtroNombre))
+            {
+                resultado = resultado.Where(p =>
+                    (p.Nombre ?? "").Contains(
+                        filtroNombre,
+                        StringComparison.OrdinalIgnoreCase));
+            }
+
+            // Filtro por categoría
+            if (filtroCategoria > 0)
+            {
+                resultado = resultado.Where(p =>
+                    p.CategoryID == filtroCategoria);
+            }
+
+            // Filtro por marca
+            if (filtroMarca > 0)
+            {
+                resultado = resultado.Where(p =>
+                    p.MarcaID == filtroMarca);
+            }
+
+            // Filtro por precio mínimo
+            if (precioMinimo.HasValue)
+            {
+                resultado = resultado.Where(p =>
+                    p.PrecioVenta >= precioMinimo.Value);
+            }
+
+            // Filtro por precio máximo
+            if (precioMaximo.HasValue)
+            {
+                resultado = resultado.Where(p =>
+                    p.PrecioVenta <= precioMaximo.Value);
+            }
+
+            // ORDENAMIENTO
+            resultado = columnaOrden switch
+            {
+                "ProductID" => ordenAscendente
+                    ? resultado.OrderBy(p => p.ProductID)
+                    : resultado.OrderByDescending(p => p.ProductID),
+
+                "Sku" => ordenAscendente
+                    ? resultado.OrderBy(p => p.Sku)
+                    : resultado.OrderByDescending(p => p.Sku),
+
+                "Nombre" => ordenAscendente
+                    ? resultado.OrderBy(p => p.Nombre)
+                    : resultado.OrderByDescending(p => p.Nombre),
+
+                "NombreCategoria" => ordenAscendente
+                    ? resultado.OrderBy(p => p.NombreCategoria)
+                    : resultado.OrderByDescending(p => p.NombreCategoria),
+
+                "NombreMarca" => ordenAscendente
+                    ? resultado.OrderBy(p => p.NombreMarca)
+                    : resultado.OrderByDescending(p => p.NombreMarca),
+
+                "PrecioVenta" => ordenAscendente
+                    ? resultado.OrderBy(p => p.PrecioVenta)
+                    : resultado.OrderByDescending(p => p.PrecioVenta),
+
+                _ => resultado.OrderBy(p => p.ProductID)
+            };
+
+            return resultado.ToList();
+        }
+    }
+
+    // CAMBIAR ORDENAMIENTO
+    private void OrdenarPor(string columna)
+    {
+        if (columnaOrden == columna)
+        {
+            ordenAscendente = !ordenAscendente;
+        }
+        else
+        {
+            columnaOrden = columna;
+            ordenAscendente = true;
+        }
+    }
+
+    // MOSTRAR ICONO DE ORDENAMIENTO
+    private string IconoOrden(string columna)
+    {
+        if (columnaOrden != columna)
+            return "↕";
+
+        return ordenAscendente ? "↑" : "↓";
+    }
+
+    // LIMPIAR FILTROS
+    private void LimpiarFiltros()
+    {
+        filtroNombre = "";
+        filtroCategoria = 0;
+        filtroMarca = 0;
+        precioMinimo = null;
+        precioMaximo = null;
+    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -123,11 +437,8 @@
     {
         try
         {
-            // Cargamos listas para los dropdowns
             categories = await Http.GetFromJsonAsync<List<CategoryResponse>>("api/Category") ?? new();
             marcas = await Http.GetFromJsonAsync<List<MarcaResponse>>("api/Marca") ?? new();
-
-            // Cargamos los productos
             products = await Http.GetFromJsonAsync<List<ProductResponse>>("api/Product");
         }
         catch (Exception ex)
@@ -151,42 +462,40 @@
             Sku = prod.Sku,
             Nombre = prod.Nombre,
             Descripcion = prod.Descripcion,
-            CategoryID = prod.CategoryID, // Nota: Asegúrate de que tu ResponseDto incluya estos IDs
+            CategoryID = prod.CategoryID,
             MarcaID = prod.MarcaID,
             Modelo = prod.Modelo,
             PrecioVenta = prod.PrecioVenta,
             Estado = prod.Estado
         };
 
-        // Como necesitamos el ID para actualizar, lo guardamos temporalmente
-        // (Una mejor práctica es tener el ID en el RequestDto o usar una variable aparte)
         editingProductId = prod.ProductID;
-
         isEditing = true;
         showForm = true;
         errorMessage = null;
     }
-
-    private int editingProductId;
 
     private async Task SaveProduct()
     {
         try
         {
             HttpResponseMessage response;
+
             if (isEditing)
             {
-                response = await Http.PutAsJsonAsync($"api/Product/{editingProductId}", currentProduct);
+                response = await Http.PutAsJsonAsync(
+                    $"api/Product/{editingProductId}", currentProduct);
             }
             else
             {
-                response = await Http.PostAsJsonAsync("api/Product", currentProduct);
+                response = await Http.PostAsJsonAsync(
+                    "api/Product", currentProduct);
             }
 
             if (response.IsSuccessStatusCode)
             {
                 showForm = false;
-                await LoadData(); // Recargamos la tabla
+                await LoadData();
             }
             else
             {
@@ -201,10 +510,14 @@
 
     private async Task DeleteProduct(int id)
     {
-        var confirm = await JSRuntime.InvokeAsync<bool>("confirm", "¿Estás seguro de eliminar este producto?");
+        var confirm = await JSRuntime.InvokeAsync<bool>(
+            "confirm",
+            "¿Estás seguro de eliminar este producto?");
+
         if (confirm)
         {
             var response = await Http.DeleteAsync($"api/Product/{id}");
+
             if (response.IsSuccessStatusCode)
             {
                 await LoadData();
@@ -215,6 +528,52 @@
     private void CancelForm()
     {
         showForm = false;
+        errorMessage = null;
+    }
+
+    private void ShowMarcaForm()
+    {
+        currentMarca = new MarcaRequest();
+        showMarcaFormVisible = true;
+        showForm = false;
+        errorMessage = null;
+    }
+
+    private async Task SaveMarca()
+    {
+        try
+        {
+            var response = await Http.PostAsJsonAsync(
+                "api/Marca", currentMarca);
+
+            if (response.IsSuccessStatusCode)
+            {
+                showMarcaFormVisible = false;
+
+                currentMarca = new MarcaRequest();
+
+                // Actualizar lista de marcas para los filtros
+                // y el formulario de productos
+                marcas = await Http.GetFromJsonAsync<List<MarcaResponse>>(
+                    "api/Marca") ?? new();
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+
+                errorMessage = $"Error al registrar la marca: {error}";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error de conexión: {ex.Message}";
+        }
+    }
+
+    private void CancelMarcaForm()
+    {
+        showMarcaFormVisible = false;
+        currentMarca = new MarcaRequest();
         errorMessage = null;
     }
 }

@@ -13,5 +13,7 @@ namespace POS.Server.Services
 
         Task<UserResponse?> UpdateUserAsync(int id, UserRequest request);
         Task<bool> DeleteUserAsync(int id);
+        Task LogoutAsync(int userId);
+        Task<List<LoginHistoryDto>> GetLoginHistoryAsync();
     }
 }

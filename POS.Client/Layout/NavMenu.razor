@@ -52,11 +52,31 @@
         </AuthorizeView>
 
         
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="Ventas">
+                <span class="oi oi-people" aria-hidden="true"></span> Ventas
+            </NavLink>
+        </div>
+
+        <AuthorizeView Roles="Administrador,Vendedor">
+            <Authorized>
                 <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Ventas">
-                        <span class="oi oi-people" aria-hidden="true"></span> Ventas
+                    <NavLink class="nav-link" href="dashboard-ventas">
+                        <span class="oi oi-graph" aria-hidden="true"></span> Dashboard Ventas
                     </NavLink>
                 </div>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="Administrador">
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="historial-sesiones">
+                        <span class="oi oi-clock" aria-hidden="true"></span> Historial Sesiones
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
            
 
 

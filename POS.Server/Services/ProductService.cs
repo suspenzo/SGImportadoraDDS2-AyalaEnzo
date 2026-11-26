@@ -78,6 +78,7 @@ namespace POS.Server.Services
                 Nombre = product.Nombre,
                 Descripcion = product.Descripcion,
                 NombreCategoria = product.Categoria?.Nombre ?? "Sin Categoría", // Manejo de nulos
+                CategoryID = product.CategoryID, 
                 MarcaID = product.MarcaID,
                 NombreMarca = product.Marca?.Nombre ?? "Sin Marca",
                 Modelo = product.Modelo,

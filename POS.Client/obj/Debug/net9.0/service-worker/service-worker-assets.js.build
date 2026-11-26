@@ -1,9 +1,233 @@
 self.assetsManifest = {
-  "version": "FuSDlI67",
+  "version": "PA3hZ5Hu",
   "assets": [
     {
       "hash": "sha256-mRRHkKsCpZho3o2g9E5XxJjQj3O5ZXkoqMH6TRSHGOo=",
       "url": "POS.Client.styles.css"
+    },
+    {
+      "hash": "sha256-mtIccbnvc8zGGOGCbPDrvE+aVNsPTAM7CAXwrfPwTsk=",
+      "url": "_content/Blazor-ApexCharts/css/apexcharts-ignite-ui.css"
+    },
+    {
+      "hash": "sha256-Qpvh7pLbzP0uFRXgkmO7CHnC25o2jSEqrWngzuVDVAI=",
+      "url": "_content/Blazor-ApexCharts/css/apexcharts.css"
+    },
+    {
+      "hash": "sha256-a6KG8DV8sTqE1EXX+G61oVm7nS+mIrnYNEE0BNTpgIQ=",
+      "url": "_content/Blazor-ApexCharts/js/apexcharts.esm.js"
+    },
+    {
+      "hash": "sha256-XLWfUrT/2DT9DmAPoT7zQ0gEUzaRpSDaiz6zH9vpb38=",
+      "url": "_content/Blazor-ApexCharts/js/apexcharts.full.min.js"
+    },
+    {
+      "hash": "sha256-+11HJvMsDOS0AWmgK2ueIcmhqJKnoHFAcL7y9Ewc3Qg=",
+      "url": "_content/Blazor-ApexCharts/js/blazor-apexcharts.js"
+    },
+    {
+      "hash": "sha256-nodk0u6KAEFPxDeKRfonP4OJTXMRNqldQ9l4hiaLR3o=",
+      "url": "_content/Blazor-ApexCharts/js/features/ignite-ui.js"
+    },
+    {
+      "hash": "sha256-WiRs/ROPpKkHQaYvAGlxi5BkT5JiRZlsMvigWdCu40M=",
+      "url": "_content/Blazor-ApexCharts/locales/ar.json"
+    },
+    {
+      "hash": "sha256-h3G2BhM/9YeqsdQo1/1n90pQzM/ia3tyorNjUMfM7SY=",
+      "url": "_content/Blazor-ApexCharts/locales/az.json"
+    },
+    {
+      "hash": "sha256-27b2lRWCEoQqcRaqR/4iLRy2avcmZRwXTvIhRNUIRbI=",
+      "url": "_content/Blazor-ApexCharts/locales/be-cyrl.json"
+    },
+    {
+      "hash": "sha256-cFSDvkl+M74GmTyYU4K5pqYqna9xjie/QXoGBz0ww/Q=",
+      "url": "_content/Blazor-ApexCharts/locales/be-latn.json"
+    },
+    {
+      "hash": "sha256-kRAjCvIU9Td+qsfEHadrbeSchrsFGkQPVkgaTAd5EdM=",
+      "url": "_content/Blazor-ApexCharts/locales/bg.json"
+    },
+    {
+      "hash": "sha256-7P5O9wU/3njGL0683+vRK5HagMBQAkWNC1cnVrRFzH4=",
+      "url": "_content/Blazor-ApexCharts/locales/ca.json"
+    },
+    {
+      "hash": "sha256-FZZ8msC5I0PeeVG8CL5AI39CjhLtndqUQ/rvzho6WA0=",
+      "url": "_content/Blazor-ApexCharts/locales/cs.json"
+    },
+    {
+      "hash": "sha256-5XmUq9n8mcu76zNrkhiclMH4ZsbBuLf1F+7MJrSrD30=",
+      "url": "_content/Blazor-ApexCharts/locales/da.json"
+    },
+    {
+      "hash": "sha256-68EXIpN3VQWAL1lj6Usuj9QUJSuBXtkNPqp3/3VClc8=",
+      "url": "_content/Blazor-ApexCharts/locales/de.json"
+    },
+    {
+      "hash": "sha256-eLbWQKi3wK5CJxBiC3PS6eAidrOEO50WRGE7V08SZ0k=",
+      "url": "_content/Blazor-ApexCharts/locales/el.json"
+    },
+    {
+      "hash": "sha256-NLip154jBblxHXCFGUyho9okjlIjDjwOO1V1yGcJy0U=",
+      "url": "_content/Blazor-ApexCharts/locales/en.json"
+    },
+    {
+      "hash": "sha256-fLhAGE9o206tXTl1dvTWSi0LXqUmfxPyjnS2Z2obvas=",
+      "url": "_content/Blazor-ApexCharts/locales/es.json"
+    },
+    {
+      "hash": "sha256-vazfXGhRAKyjP45h76tn8yLQqIEeqD/isB8cBZnM+N0=",
+      "url": "_content/Blazor-ApexCharts/locales/et.json"
+    },
+    {
+      "hash": "sha256-cLOYqLL3a96gEIpU1fy8I87/t24F4CF0Vvkq059/lv4=",
+      "url": "_content/Blazor-ApexCharts/locales/eu.json"
+    },
+    {
+      "hash": "sha256-1eyqypJJ3EAf+cXbp4hJgXFrife5hN52NTyk4ZuihMU=",
+      "url": "_content/Blazor-ApexCharts/locales/fa.json"
+    },
+    {
+      "hash": "sha256-Iv5h28N/88d7LqMvMoeiMCrtrvPLf2FLKSkwemh0V8g=",
+      "url": "_content/Blazor-ApexCharts/locales/fi.json"
+    },
+    {
+      "hash": "sha256-dhcCoK2fOxzzQBxVNG/RqzllDWe3QvS9h7R873B5Sbk=",
+      "url": "_content/Blazor-ApexCharts/locales/fr.json"
+    },
+    {
+      "hash": "sha256-15Jizc9pEdGFO7PVo63OD6UUXb9EX60NWBzqKqc7ND4=",
+      "url": "_content/Blazor-ApexCharts/locales/gl.json"
+    },
+    {
+      "hash": "sha256-M/0fc0l5AM6hBMyRizYWrLwdal563uC54bERJgwto/s=",
+      "url": "_content/Blazor-ApexCharts/locales/he.json"
+    },
+    {
+      "hash": "sha256-SMNIk7smRISD6o4J258LttKveKZ1L0AoGgnsjufxRLw=",
+      "url": "_content/Blazor-ApexCharts/locales/hi.json"
+    },
+    {
+      "hash": "sha256-ZS8NhcX6PrkjX2R1ezUGwLd+kQIuPq53rOzpqtdLbPk=",
+      "url": "_content/Blazor-ApexCharts/locales/hr.json"
+    },
+    {
+      "hash": "sha256-vk9Tsw+ulk8O3+qGOcZTug1sAr1F08L6k6m8RWPoVek=",
+      "url": "_content/Blazor-ApexCharts/locales/hu.json"
+    },
+    {
+      "hash": "sha256-m+L552PxaKADL/wTPagCfr1OY/tP5eaDDwnpNRvmU9c=",
+      "url": "_content/Blazor-ApexCharts/locales/hy.json"
+    },
+    {
+      "hash": "sha256-8Kk2qc7qiBK87xLO/iEZBVARo4QWka/nNPYGJGTuoVw=",
+      "url": "_content/Blazor-ApexCharts/locales/id.json"
+    },
+    {
+      "hash": "sha256-4I0VeYz1WmHqasOD9DfCvin3UKM9CfUK/mj6FVBDXCE=",
+      "url": "_content/Blazor-ApexCharts/locales/it.json"
+    },
+    {
+      "hash": "sha256-+aPk6+2+tYZ3BK/aFXwH6OmgeFXn702699zLHX8pnEg=",
+      "url": "_content/Blazor-ApexCharts/locales/ja.json"
+    },
+    {
+      "hash": "sha256-EyH9Xu/vXmFgfxzZO3xIbgVkv8NBXUVFPd11PAxTPYg=",
+      "url": "_content/Blazor-ApexCharts/locales/ka.json"
+    },
+    {
+      "hash": "sha256-rbXhJoHzQPOoVyYGtzz9ZkPrnc/Kle2y4Cr5vEMxgGg=",
+      "url": "_content/Blazor-ApexCharts/locales/ko.json"
+    },
+    {
+      "hash": "sha256-FSwTPkO+kl1rL6g7yt11MoPgaOxhpqsMEvqkCp4tu7Q=",
+      "url": "_content/Blazor-ApexCharts/locales/lt.json"
+    },
+    {
+      "hash": "sha256-0aX375vETJqlbfuAktWav9KFBQeYjRzeyIGomBLrB9E=",
+      "url": "_content/Blazor-ApexCharts/locales/lv.json"
+    },
+    {
+      "hash": "sha256-TNrqq8xIokMkczSzW7J74xlDlUciyXOIH3kJkMz+WJ8=",
+      "url": "_content/Blazor-ApexCharts/locales/ms.json"
+    },
+    {
+      "hash": "sha256-t9qc/2kl6O56upYF3NeMRUKUag4D0sj3SvdKKF2XM8Q=",
+      "url": "_content/Blazor-ApexCharts/locales/nb.json"
+    },
+    {
+      "hash": "sha256-4CpuIr3oje09leO9WlxKKUEvRHaXBHkTUeflTUN71ZA=",
+      "url": "_content/Blazor-ApexCharts/locales/nl.json"
+    },
+    {
+      "hash": "sha256-6XVhgBTtqXWiiesP6kzFYd/ryauXRVoeTwCX4IhuMkw=",
+      "url": "_content/Blazor-ApexCharts/locales/pl.json"
+    },
+    {
+      "hash": "sha256-RQvGpfSgr5eqQk18zJ0SIYW0gIluqBl9YO4CGVKwtfk=",
+      "url": "_content/Blazor-ApexCharts/locales/pt-br.json"
+    },
+    {
+      "hash": "sha256-l83RSU21eUe/IAi9QzdXFCs+SpF9+2HNPKY2b8aVP9w=",
+      "url": "_content/Blazor-ApexCharts/locales/pt.json"
+    },
+    {
+      "hash": "sha256-+3Cb0+i//mBsYS3qz/nfh+fDC65styhCBP+VAHTq9Ow=",
+      "url": "_content/Blazor-ApexCharts/locales/ro.json"
+    },
+    {
+      "hash": "sha256-2JFtordZOeTmnk58iu/vBGM9RxDcQ+Kp+l5EqmC7tSU=",
+      "url": "_content/Blazor-ApexCharts/locales/ru.json"
+    },
+    {
+      "hash": "sha256-qHMo6Va9CDDBMFwIOJRiC5GK7741vjeDFAcyKoidO1s=",
+      "url": "_content/Blazor-ApexCharts/locales/sk.json"
+    },
+    {
+      "hash": "sha256-eb5fhFAwLhAN1SpaVVhK910QzzER3/zZrzba0NXWR2I=",
+      "url": "_content/Blazor-ApexCharts/locales/sl.json"
+    },
+    {
+      "hash": "sha256-78uFMY27p6qu6ApaqsSkD/EUGHTEOuVeF25tW6KZUhI=",
+      "url": "_content/Blazor-ApexCharts/locales/sq.json"
+    },
+    {
+      "hash": "sha256-xf87NEHNuEvRYWacJ+yntv3aBTgP9RTk2TPb1UTUj+Y=",
+      "url": "_content/Blazor-ApexCharts/locales/sr.json"
+    },
+    {
+      "hash": "sha256-E9cRJYX8W6OtuQ3BuSa7rFMcDV/wN5vx96WbFFFmQeo=",
+      "url": "_content/Blazor-ApexCharts/locales/sv.json"
+    },
+    {
+      "hash": "sha256-X1Mlu6rSIAlsr7SuinKdYb8RGDQsFW4OBYRcvBnLH0g=",
+      "url": "_content/Blazor-ApexCharts/locales/th.json"
+    },
+    {
+      "hash": "sha256-Z2WJausp7ZOW/JWQ8Odtm5mduktbjNLDa6eCQODuIeI=",
+      "url": "_content/Blazor-ApexCharts/locales/tr.json"
+    },
+    {
+      "hash": "sha256-7SrNradPZ6ZBC+jyEtRBjL/W0Eei+NWL2jcoS/sHw5Q=",
+      "url": "_content/Blazor-ApexCharts/locales/uk.json"
+    },
+    {
+      "hash": "sha256-0eqcHS5YkB4wW9Z+wJMZ4eCoKqdL/g4Z8yAuiRzVEDM=",
+      "url": "_content/Blazor-ApexCharts/locales/vi.json"
+    },
+    {
+      "hash": "sha256-qvhadEn2x5u4sE9XCBwj3qwsQCdU7wNsIZIZ3IXvCSY=",
+      "url": "_content/Blazor-ApexCharts/locales/zh-cn.json"
+    },
+    {
+      "hash": "sha256-W7f2bgwCFELEqz4AzWVzf0BzHdc95FX4Y31CqYuar7c=",
+      "url": "_content/Blazor-ApexCharts/locales/zh-tw.json"
+    },
+    {
+      "hash": "sha256-qeUH5rxG9zhK2bOUcjbISUs08OfMJC2iqwpeg0hsH6o=",
+      "url": "_framework/Blazor-ApexCharts.d7md44e1wj.wasm"
     },
     {
       "hash": "sha256-UIF2OThl7zWnMOJDbpgenriOs/8hzadXfQtpirvug64=",
@@ -70,6 +294,14 @@ self.assetsManifest = {
       "url": "_framework/Microsoft.Extensions.DependencyInjection.Abstractions.ed03hiunbb.wasm"
     },
     {
+      "hash": "sha256-eUH89CWR/tsf7NSOGeqZoaGhdcYAx3yvGukdiP8PWCc=",
+      "url": "_framework/Microsoft.Extensions.Diagnostics.Abstractions.lhcpeuzonu.wasm"
+    },
+    {
+      "hash": "sha256-5UtOJd++YCAbN+YVNJdWzD6uontiHb8L3wPBoxfyT5M=",
+      "url": "_framework/Microsoft.Extensions.Diagnostics.lse40y6o5n.wasm"
+    },
+    {
       "hash": "sha256-yla9JEXwFYjq8UmGAcSo4yPrdB8WCQg2KibNQwLoudE=",
       "url": "_framework/Microsoft.Extensions.FileProviders.Abstractions.u2l2e9wxqi.wasm"
     },
@@ -82,6 +314,10 @@ self.assetsManifest = {
       "url": "_framework/Microsoft.Extensions.FileSystemGlobbing.kd20hmmh3i.wasm"
     },
     {
+      "hash": "sha256-hQBuZqm9oDerqzwTZsIu6tnlGi2Lhu6YbjKcXXlP/3g=",
+      "url": "_framework/Microsoft.Extensions.Http.jmxtshryzr.wasm"
+    },
+    {
       "hash": "sha256-rTB1x5Gg77inpc8QsxlRX9jG//4Z95sYB2469aniZgQ=",
       "url": "_framework/Microsoft.Extensions.Logging.3sqj5fkfyu.wasm"
     },
@@ -92,6 +328,10 @@ self.assetsManifest = {
     {
       "hash": "sha256-e5UmCFE9EvmkdbhE/JwDugy3d5Uw/mP6OuRabO5z2pc=",
       "url": "_framework/Microsoft.Extensions.Options.1p47785ul0.wasm"
+    },
+    {
+      "hash": "sha256-meVx/z3UlKVjnnma5v/ZX7EctFgGScSoqLOhqhXMxa4=",
+      "url": "_framework/Microsoft.Extensions.Options.ConfigurationExtensions.pgg9uv7c4y.wasm"
     },
     {
       "hash": "sha256-azCcz/XKyI6nB4SOdYy8dX22XWzbdmIPWxWmwPhlh7U=",
@@ -138,20 +378,20 @@ self.assetsManifest = {
       "url": "_framework/Microsoft.Win32.Registry.kxreztpsym.wasm"
     },
     {
-      "hash": "sha256-FpNiZmhpbv2UEbJLMmTBQjwmKiffCwNiy3ga9FJRm8c=",
-      "url": "_framework/POS.Client.acj4qu2qkb.pdb"
+      "hash": "sha256-88Ga8knF3VqU+XU8ZBSYdZAu0DtbSaPW1HLLsFW1oo8=",
+      "url": "_framework/POS.Client.le0430sfq8.pdb"
     },
     {
-      "hash": "sha256-OnfR58ZhgKJBH1xFmYgDCEqYEeu9eX3WenbbZvhAD2c=",
-      "url": "_framework/POS.Client.yuatf7ndyz.wasm"
+      "hash": "sha256-vnJzJXkf0eHduQ1Q5UQAGUxjq3MhlxC3bWaOYk0olYA=",
+      "url": "_framework/POS.Client.y49op83p44.wasm"
     },
     {
-      "hash": "sha256-h/1KhTZULH6KLGsfyBvwridOl7bpAkrQRDi2lo87CxU=",
-      "url": "_framework/POS.Shared.p8ci0pnmia.pdb"
+      "hash": "sha256-IZFgwapJcYVJc5wMVhsZ/uIR/v1RL2O9s02njmM1Bdc=",
+      "url": "_framework/POS.Shared.9q74thrbme.wasm"
     },
     {
-      "hash": "sha256-gOIsopfIs9ITQMV9FK011w++imHyJOolp9DcB0+jit0=",
-      "url": "_framework/POS.Shared.w06s58hah1.wasm"
+      "hash": "sha256-7QFFf53kIpr9gHMo4uS8AMu5f6+/3hg/mBOcON0UwSU=",
+      "url": "_framework/POS.Shared.v5cygjxp5d.pdb"
     },
     {
       "hash": "sha256-n/Oc1WzjrFIIUZ+OrdGL5V2zdlBCnx7tDallbl1OAJo=",
@@ -806,7 +1046,7 @@ self.assetsManifest = {
       "url": "_framework/WindowsBase.y8ae02uxne.wasm"
     },
     {
-      "hash": "sha256-Gs5UAGrUhT0Z/BLtiK/GNy5TSwXT8/3BOuLnTk4RLxE=",
+      "hash": "sha256-ivFkDQbzFvh9GNxwKh8bGqeOzuFFGDE4aU/hyLvPCrc=",
       "url": "_framework/blazor.boot.json"
     },
     {
@@ -874,7 +1114,7 @@ self.assetsManifest = {
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-gUqPrxXpUUrvElsAbDcItq/A3lnvoMc8eoOHLW8NJOE=",
+      "hash": "sha256-TRXZ3bFSo2m4ffuXp9ZZGuvPU0m7bOqmG60izj9Ec30=",
       "url": "index.html"
     },
     {

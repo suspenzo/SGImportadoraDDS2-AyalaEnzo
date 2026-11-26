@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using POS.Server.Services;
-using POS.Shared.DTOs; 
+using POS.Shared.DTOs;
+using System.Security.Claims;
 
 namespace POS.Server.Controllers
 {
@@ -67,6 +68,25 @@ namespace POS.Server.Controllers
             var deleted = await _authService.DeleteUserAsync(id);
             if (!deleted) return NotFound("Usuario no encontrado");
             return NoContent();
+        }
+
+        [HttpPost("logout")]
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userIdClaim != null)
+            {
+                await _authService.LogoutAsync(int.Parse(userIdClaim));
+            }
+            return Ok();
+        }
+
+        [HttpGet("historial")]
+        [Authorize(Roles = "Administrador")] // Solo el admin puede ver esto
+        public async Task<ActionResult<List<LoginHistoryDto>>> GetHistorial()
+        {
+            return Ok(await _authService.GetLoginHistoryAsync());
         }
     }
 }
